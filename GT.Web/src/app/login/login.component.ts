@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
     login($event:any){
         this.userService.login(this.profile).subscribe(data => {
-            localStorage.setItem('currentUser',data.Token);
+            localStorage.setItem('Token',data.Token);
             this.router.navigateByUrl('/');
         },
         error => {

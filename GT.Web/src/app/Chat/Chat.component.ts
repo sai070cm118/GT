@@ -3,6 +3,8 @@ import {Component, Input, Output, EventEmitter, OnInit,OnDestroy, ViewChild, Ele
 import {IGroupMessage} from '../Services/WebSocket/Models';
 import {AppData} from '../Services/WebSocket/AppData';
 
+import { SocketFunctions } from '../Services/WebSocket/SocketFunctions/SocketFunctions';
+
 
 @Component({
     moduleId: module.id,
@@ -35,7 +37,10 @@ export class ChatComponent {
         isContactsOpen:false
     };
 
-    constructor(private _Globals:AppData){
+    constructor(
+        private _Globals:AppData,
+        private _socketFunctions:SocketFunctions
+    ){
         
     }
 
@@ -97,7 +102,7 @@ export class ChatComponent {
             "message":this.boxMessage
         }
 
-        this._Globals.sendMessage(groupMessage);
+        this._socketFunctions.sendMessage(groupMessage);
         this.boxMessage='';
     }
 

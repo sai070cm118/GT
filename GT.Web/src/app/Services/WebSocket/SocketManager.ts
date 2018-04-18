@@ -8,7 +8,10 @@ import { AppSocket } from './AppSocket';
 export class SocketManager {
   
 
-  constructor(private socket: AppSocket,private dataRouteManager:DataRouteManager){
+  constructor(
+    private socket: AppSocket,
+    private dataRouteManager:DataRouteManager
+  ){
     this.socket.connect();
     this.initializeData();
 

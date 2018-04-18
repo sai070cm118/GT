@@ -1,9 +1,7 @@
 import {Component,Input, Output, EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 
-import {
-    Globals
-} from '../../models/Globals';
+import { AppData } from '../../Services/WebSocket/AppData';
 
 
 @Component({
@@ -20,7 +18,7 @@ export class PopOverMenuComponent {
     
     constructor(
         private router: Router,
-        private _Globals: Globals
+        private _Globals: AppData
     ){ 
 
     }

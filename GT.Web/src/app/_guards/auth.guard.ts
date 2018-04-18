@@ -4,7 +4,8 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { UserService } from '../Services/index';
 import { Observable } from 'rxjs/Observable';
 
-import {Globals}  from '../models/Globals';
+import { AppData } from '../Services/WebSocket/AppData';
+import { SocketFunctions } from '../Services/WebSocket/SocketFunctions/SocketFunctions';
 
 
 @Injectable()
@@ -13,7 +14,12 @@ export class AuthGuard implements CanActivate {
     public UserState:any =0;
     public IsTokenValid:any;
 
-    constructor(private router: Router,private userService: UserService,private _Globals:Globals) { }
+    constructor(
+        private router: Router,
+        private userService: UserService,
+        private _Globals:AppData,
+        private _socketFunctions:SocketFunctions
+    ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
@@ -23,14 +29,14 @@ export class AuthGuard implements CanActivate {
 
         
         if(state.url=='/logout'){
-            localStorage.removeItem('currentUser');
+            localStorage.removeItem('Token');
             this.router.navigate(['/login']);
             this._Globals.Profile=null;
         }
         // Call Service for  First Request
-        else if (localStorage.getItem('currentUser')!=undefined) {
+        else if (localStorage.getItem('Token')!=undefined) {
 
-            return  this.userService.validateToken(localStorage.getItem('currentUser')).map(validateResult => {
+            return  this.userService.validateToken(localStorage.getItem('Token')).map(validateResult => {
                 console.log(validateResult);
                 if(!validateResult.error){
                     this.UserState=validateResult.data.Status;
@@ -63,7 +69,7 @@ export class AuthGuard implements CanActivate {
                         }
                     }
                     else if(this.UserState==4){
-                        this._Globals.initializeData();
+                        this._socketFunctions.initializeData();
                         if(state.url=='/'){
                             return true;
                         }
@@ -76,7 +82,7 @@ export class AuthGuard implements CanActivate {
                             return true;
                         }
                         else{
-                            localStorage.removeItem('currentUser');
+                            localStorage.removeItem('Token');
                             this._Globals.Profile=null;
                             this.router.navigate(['/login']);
                         }
@@ -84,7 +90,7 @@ export class AuthGuard implements CanActivate {
                 }
                 else{
                     this._Globals.Profile=null;
-                    localStorage.removeItem('currentUser');
+                    localStorage.removeItem('Token');
                     this.router.navigate(['/login']);
                 }
             }); 
@@ -106,7 +112,7 @@ export class AuthGuard implements CanActivate {
                 if(state.root.firstChild.url[0]!=undefined && state.root.firstChild.url[0].path!=undefined && state.root.firstChild.url[0].path=='login'){
                     return this.userService.validateToken(route.params.id).map(validateResult => {
                         if(!validateResult.error){
-                            localStorage.setItem('currentUser',route.params.id);
+                            localStorage.setItem('Token',route.params.id);
                             this.router.navigate(['/']);
                             return true;
                         }

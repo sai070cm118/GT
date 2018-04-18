@@ -1,19 +1,28 @@
-import { Injectable } from '@angular/core';
+import { Injectable , Injector} from '@angular/core';
 import { SocketManager } from '../SocketManager';
 import { AppData } from '../AppData';
+
+import { ProfileService } from '../../Profile.service'
+
+
 import { 
     IGroupMessage,
-    IAppGame
+    IAppGame,
+    IProfile
 } from '../Models';
 
 
 @Injectable()
 export class SocketFunctions {
 
+  private _SocketService:SocketManager
     constructor(
         private _appData:AppData,
-        private _SocketService:SocketManager
+        private _profileService:ProfileService,
+        injector:Injector
     ){
+      
+      setTimeout(() => this._SocketService = injector.get(SocketManager));
     }
 
     sendMessage(groupMessage:IGroupMessage){
@@ -141,5 +150,25 @@ export class SocketFunctions {
         }
     }
           
+    initializeData(){
+
+      console.log('Coming');
+      //Observable.interval(1000).map(tick => (new Date().getTime()) + ((new Date().getTimezoneOffset()) * 60000)).share().subscribe(time => {this.currentTime = time;});
+
+      this._appData.Profile=new IProfile();
+
+
+      this._profileService.getProfile().subscribe(profile=>{
+      this._appData.Profile=new IProfile(profile.data._id,profile.data.Email,profile.data.ProfileName,profile.data.FirstName,profile.data.LastName,profile.data.ProfilePic,profile.data.Location,profile.data.Live,profile.data.IsActive,profile.data.Status,profile.data.User,profile.data.Account);
+
+      this._SocketService.Send({controller:'UserGroup',method:'getUserGroup',data:{}});
+      this.getAppGames();
+      this.getPaidRunningGames();
+      this.getFreeRunningGames();
+      this.getMyJoinedGames(); 
+
+
+      });
+    }
     
 }

@@ -3,9 +3,7 @@ import {Component, Input, Output, EventEmitter, OnInit,OnDestroy, ViewChild, Ele
 import {IProfile} from '../models/model';
 import { ProfileService }  from '../Services/Profile.service';
 
-import {
-    Globals
-} from '../models/Globals';
+import { AppData } from '../Services/WebSocket/AppData';
 
 
 @Component({
@@ -20,7 +18,7 @@ export class LeftMenuComponent {
 
     constructor(
         private _ProfileService:ProfileService,
-        private _Globals: Globals
+        private _Globals: AppData
     ) {
     }
 

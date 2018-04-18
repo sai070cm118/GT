@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { retry } from 'rxjs/operator/retry';
-import {Globals} from '../models/Globals';
+import {AppData} from '../Services/WebSocket/AppData';
 
 @Pipe({name: 'remainTime'})
 export class RemainTimePipe implements PipeTransform {
 
 
-    constructor(private _Globals:Globals){
+    constructor(private _Globals:AppData){
 
     }
 

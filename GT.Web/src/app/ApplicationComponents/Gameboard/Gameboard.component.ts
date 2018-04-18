@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Globals } from '../../models/Globals';
+import { AppData } from '../../Services/WebSocket/AppData';
 import { retry } from 'rxjs/operator/retry';
+
+import { SocketFunctions } from '../../Services/WebSocket/SocketFunctions/SocketFunctions';
 
 
 @Component({
@@ -13,10 +15,12 @@ import { retry } from 'rxjs/operator/retry';
 
 export class GameboardComponent {
 
-    constructor(private _Globals:Globals){
+    constructor(private _Globals:AppData,
+    private _socketFunctions:SocketFunctions){
 
     }
 
+    
 
     getPaidGames(){
         return this._Globals.Profile.AppGames.filter(x=>!x.IsFree);
@@ -27,11 +31,11 @@ export class GameboardComponent {
     }
 
     createGame(IsFree:boolean,challengeId:number){
-        this._Globals.createGame({ ChallangeId:challengeId, IsFree: IsFree });
+        this._socketFunctions.createGame({ ChallangeId:challengeId, IsFree: IsFree });
     }
 
     betOnGame(IsFree:boolean,gameId:number){
-        this._Globals.betOnGame({ GameId:gameId, IsFree: IsFree });
+        this._socketFunctions.betOnGame({ GameId:gameId, IsFree: IsFree });
     }
 
 
@@ -90,7 +94,7 @@ export class GameboardComponent {
             "IsFree":IsFree
         }
 
-        this._Globals.sendGameMessage(gameMessag);
+        this._socketFunctions.sendGameMessage(gameMessag);
         
     }
 

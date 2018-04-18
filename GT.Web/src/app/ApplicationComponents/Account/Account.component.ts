@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {Globals} from '../../models/Globals'
+import { AppData } from '../../Services/WebSocket/AppData';
 
 @Component({
     moduleId: module.id,
@@ -14,7 +14,7 @@ export class AccountComponent {
     accountDeposit:Deposit=new Deposit();
 
 
-    constructor(private _Globals:Globals){
+    constructor(private _Globals:AppData){
 
     }
 

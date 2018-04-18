@@ -4,7 +4,7 @@ import {IProfile} from '../models/model';
 import {Observable} from 'rxjs/Rx';
 import { HttpClientWraper } from './HttpClientWraper';
 
-import {Globals} from '../models/Globals';
+import { AppData } from '../Services/WebSocket/AppData';
 
 @Injectable()
 export class ProfileService{
@@ -24,7 +24,7 @@ constructor(
             .catch((error:any) => Observable.throw(error || 'Server error'));
     }
     
-    updateProfile(_Globals:Globals){
+    updateProfile(_Globals:AppData){
         return this.http.put('http://localhost:3002/api/profile',_Globals.Profile)
         .map((res:Response) => res.json())
         .catch((error:any) => Observable.throw(error || 'Server error'));

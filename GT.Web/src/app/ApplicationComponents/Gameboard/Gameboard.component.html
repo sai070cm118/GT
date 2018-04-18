@@ -13,7 +13,7 @@
               </p>
               <div class="row">
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="background-color: gainsboro;padding:20px;box-sizing: border-box;" *ngFor="let game of getParticipentedGames(true);">
-                    <div  class="col-md-8 col-lg-8 col-sm-6 col-xs-12"  style="background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;"  (click)="_Globals.getAppGameByGameId(game._id,true)">
+                    <div  class="col-md-8 col-lg-8 col-sm-6 col-xs-12"  style="background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;"  (click)="_socketFunctions.getAppGameByGameId(game._id,true)">
                     <table class="table table-striped">
                         <tbody>
                           <tr>
@@ -34,8 +34,8 @@
                           </tr>
                         </tbody>
                     </table>
-                    <ul *ngIf="_Globals.getAppGameByGameId(game._id,true)!=undefined" >
-                      <li *ngFor="let position of _Globals.getAppGameByGameId(game._id,true).Positions" (click)="_Globals.betOnGamePosition(true,game._id,position._id)">{{position.Title}}</li>
+                    <ul *ngIf="_socketFunctions.getAppGameByGameId(game._id,true)!=undefined" >
+                      <li *ngFor="let position of _socketFunctions.getAppGameByGameId(game._id,true).Positions" (click)="_socketFunctions.betOnGamePosition(true,game._id,position._id)">{{position.Title}}</li>
                     </ul>
                     <circle-progress
                       [percent]="getTime(game.StartOn,game.EndAt)"
@@ -97,7 +97,7 @@
                 </p>
                 <div class="row">
                   <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="background-color: gainsboro;padding:20px;box-sizing: border-box;" *ngFor="let game of getParticipentedGames(false);">
-                      <div  class="col-md-8 col-lg-8 col-sm-6 col-xs-12" style="background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;"  (click)="_Globals.getAppGameByGameId(game._id,false)" >
+                      <div  class="col-md-8 col-lg-8 col-sm-6 col-xs-12" style="background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;"  (click)="_socketFunctions.getAppGameByGameId(game._id,false)" >
                       <table class="table table-striped">
                           <tbody>
                             <tr>
@@ -119,8 +119,8 @@
                           </tbody>
                       </table>
 
-                      <ul *ngIf="_Globals.getAppGameByGameId(game._id,false)!=undefined" >
-                        <li *ngFor="let position of _Globals.getAppGameByGameId(game._id,false).Positions"  (click)="_Globals.betOnGamePosition(false,game._id,position._id)">{{position.Title}}</li>
+                      <ul *ngIf="_socketFunctions.getAppGameByGameId(game._id,false)!=undefined" >
+                        <li *ngFor="let position of _socketFunctions.getAppGameByGameId(game._id,false).Positions"  (click)="_socketFunctions.betOnGamePosition(false,game._id,position._id)">{{position.Title}}</li>
                       </ul>
                     </div>
                     

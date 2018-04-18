@@ -1,4 +1,5 @@
 import {Component,Input, Output,EventEmitter} from '@angular/core';
+import { AppData } from '../../Services/WebSocket/AppData';
 
 
 import {SocketFunctions} from '../../Services/WebSocket/SocketFunctions/SocketFunctions';
@@ -14,7 +15,10 @@ export class ChatProfileListComponent {
     @Output() viewUserChat=new EventEmitter();
 
 
-    constructor(private _Globals:AppData){
+    constructor(
+        private _Globals:AppData,
+        private _socketFunctions:SocketFunctions
+    ){
 
         console.log(_Globals);
     }
@@ -27,11 +31,11 @@ export class ChatProfileListComponent {
 
         this._Globals.CurrentGroupId=groupId;
         if(this._Globals.Profile.UserGroups.find(x => x._id == groupId).Messages==undefined){
-            this._Globals.getGroupMessages(groupId,'NoMessages');
+            this._socketFunctions.getGroupMessages(groupId,'NoMessages');
         }
         else{
 
-            this._Globals.getGroupMessages(groupId,this._Globals.Profile.UserGroups.find(x => x._id == groupId).Messages[0]._id);
+            this._socketFunctions.getGroupMessages(groupId,this._Globals.Profile.UserGroups.find(x => x._id == groupId).Messages[0]._id);
         }
 
         this.viewUserChat.emit({});

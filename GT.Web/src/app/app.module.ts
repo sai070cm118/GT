@@ -48,11 +48,17 @@ import {ProfileComponent} from './ApplicationComponents/Profile/index';
 import {SettingsComponent} from './ApplicationComponents/Settings/index';
 
 
+import { SocketFunctions } from './Services/WebSocket/SocketFunctions/SocketFunctions';
 import { SocketIoModule } from 'ng-socket-io';
 import { AppSocket } from './Services/WebSocket/AppSocket';
 
-import {Globals} from './models/Globals';
+import { DataRouteManager } from './Services/WebSocket/DataRouteManager';
+import { AppConfig } from '../Utilities/AppConfig';
+import { AppData } from './Services/WebSocket/AppData';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule  } from '@angular/common/http';
 
+import {ProfileController} from './Services/WebSocket/RouteService/ProfileController'
 
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import {RemainTimePipe} from './Filters/RemainTimePipe';
@@ -82,6 +88,7 @@ import {
         HttpModule,
         SocketIoModule,
         routing,
+        HttpClientModule,
         NgCircleProgressModule.forRoot({})
     ],
     declarations: [
@@ -123,16 +130,19 @@ import {
         AuthGuard,
         UserService,
         GroupMessageService,
-
+        HttpClientModule,
+        DataRouteManager,
         AppSocket,
         SocketManager,
         // providers used to create fake backend
         MockBackend,
         BaseRequestOptions,
-
+        ProfileController,
         //My services
+        SocketFunctions,
         ProfileService,
         MenuService,
+        AppConfig,
         MessageService,
         NotificationService,
         ChatService,
@@ -141,7 +151,7 @@ import {
         HttpClientWraper,
         
         //Global values
-        Globals
+        AppData,
     ],
     bootstrap: [AppComponent]
 })

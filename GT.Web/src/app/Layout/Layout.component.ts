@@ -10,9 +10,7 @@ import {
 } from '@angular/core';
 import {Observable} from 'rxjs/Rx';
 
-import {
-    Globals
-} from '../models/Globals';
+import { AppData } from '../Services/WebSocket/AppData';
 
 import { 
     SocketManager,
@@ -53,7 +51,7 @@ export class LayoutComponent {
 
 
     configuarion={
-        Profile:Globals,
+        Profile:AppData,
         boxControls:{},
         chatBoxControls:{},
         chatHistory:[],
@@ -74,7 +72,7 @@ export class LayoutComponent {
         private _ChatService:ChatService,
         private _ChatBoxService:ChatBoxService,
         private _BoxControlService:BoxControlService,
-        private _Globals: Globals
+        private _Globals: AppData
     ){
 
 
