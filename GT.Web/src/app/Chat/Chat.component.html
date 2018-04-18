@@ -1,0 +1,51 @@
+<div id="ChatWindow" 
+		[class.negativeZIndexHide]='settings.negativeZindex' 
+		[class.fadeOutLeft]='settings.fadeOutLeft' 
+		[class.fadeInRight]='settings.fadeInRight' 
+		class="col-md-4 col-sm-6 animated fadeOutLeft negativeZIndexHide" 
+		style="bottom: 60px;right: 0px;">
+	<!-- DIRECT CHAT -->
+
+	
+	<app-Box (toggleChatContacts)='toggleChatContacts()' (toggleChatWindow)='toggleChatWindow()' [boxControls]='boxControls' >
+		<div class="body">
+			
+			<!-- direct-chat-messages -->
+			<div class="direct-chat-messages" #chatMessagePanel >
+				<app-ChatMessageList ></app-ChatMessageList>
+			</div>
+			<!--/.direct-chat-messages-->
+
+			<!-- Contacts are loaded here -->
+			<div class="direct-chat-contacts">
+				<app-ChatProfileList (viewUserChat)='selectUser($event)' ></app-ChatProfileList>
+			<!-- /.contatcts-list -->
+			</div>
+		</div>
+		<div class="footer">
+			<form action="#" method="post"  *ngIf="_Globals.CurrentGroupData!=undefined">
+				<div class="input-group">
+					<input (keyup.enter)="sendMessageToUser()" type="text" name="message" placeholder="Type Message ..." class="form-control" [(ngModel)]='boxMessage' >
+						<span class="input-group-btn">
+						<button  (click)='sendMessageToUser()' type="button" class="btn btn-info btn-flat">Send</button>
+						</span>
+				</div>
+			</form>
+		</div>
+
+
+	</app-Box>
+	
+	<!--/.direct-chat -->
+</div>
+<!-- /.col -->
+	
+<div id="small-chat"  [class.active]='settings.chatButtonActive'  class="close-chat" (click)="toggleChatWindow()">
+
+    <span class="badge badge-warning pull-right"></span>
+    <!--<span class="badge badge-warning pull-right">5</span>-->
+    <a class="open-small-chat">
+        <i class="fa fa-comments" [class.fa-comments]='settings.facomments' [class.fa-remove]='settings.faremove'></i>
+
+    </a>
+</div>

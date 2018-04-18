@@ -1,0 +1,23 @@
+<div class="box box-info" [class.collapsed-box]='iscollapsed' [class.isDisplayNone]='isClosed' [class.direct-chat]='boxControls.isChatBox' [class.direct-chat-info]='boxControls.isChatBox'  [class.direct-chat-contacts-open]='boxControls.isContactsOpen'>
+  <div class="box-header with-border">
+    <h3 class="box-title">{{boxControls.title}}</h3>
+    <div class="box-tools pull-right">
+      <!-- Buttons, labels, and many other things can be placed here! -->
+      <!-- Here is a label for example -->
+        <img  *ngFor="let image of boxControls.images" src={{image.src}}  class="direct-chat-img"/>
+        <button type="button" class="btn btn-box-tool" data-widget="collapse" (click)="toggleCollaps($event)"><i class="fa"[class.fa-plus]='iscollapsed' [class.fa-minus]='!iscollapsed'  [class.isDisplayNone]='!boxControls.collapse'></i>
+        </button>
+        <button type="button" class="btn btn-box-tool" title="Contacts" data-widget="chat-pane-toggle" (click)="toggleContactWindow()" [class.isDisplayNone]='!boxControls.chat'>
+					<i class="fa fa-comments"></i></button>
+        <app-DropdownMenu [class.isDisplayNone]='boxControls.settings.hide' [settingList]='boxControls.settings.settingList'></app-DropdownMenu>
+        <button type="button" class="btn btn-box-tool" data-widget="remove" (click)="closeBox($event)" [class.isDisplayNone]='!boxControls.close'><i class="fa fa-times"></i></button>
+        <span  *ngFor="let label of boxControls.lables"   class="label label-primary">{{label.text}}</span>
+    </div><!-- /.box-tools -->
+  </div><!-- /.box-header -->
+  <div class="box-body" [style.min-height]="boxControls.minHeight ? boxControls.minHeight : 'none'"  [style.max-height]="boxControls.maxHeight ? boxControls.maxHeight : 'none'" style="overflow-x:hidden;overflow-y:auto;">
+    <ng-content select='.body'></ng-content>
+  </div><!-- /.box-body -->
+  <div class="box-footer" [class.isDisplayNone]='!boxControls.footer'>
+    <ng-content select='.footer'></ng-content>
+  </div><!-- box-footer -->
+</div><!-- /.box -->

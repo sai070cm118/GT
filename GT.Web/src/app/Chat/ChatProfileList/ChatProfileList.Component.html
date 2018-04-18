@@ -1,0 +1,20 @@
+<ul class="contacts-list" *ngIf="_Globals!=undefined">
+    <li *ngFor="let group of _Globals.Profile.UserGroups; let i=index;" (click)='getMessages(group._id)'>
+        <a >
+            <img alt="User Image" class="contacts-list-img" [src]="group" onError="this.src='./Content/Images/profile.png';" >
+
+            <div class="contacts-list-info">
+                <span class="contacts-list-name">
+                    {{group.GroupName}}
+
+                    <i *ngIf="!group.IsGroup" class="fa fa-circle  pull-right" style="font-size:16px;" [class.text-success]='group' [class.text-danger]='!group' ></i>
+                    
+                    <small class="contacts-list-date pull-right">time</small>
+                    
+                </span>
+            <span class="contacts-list-msg">Text</span>
+            </div>
+            
+        </a>
+    </li>
+</ul>

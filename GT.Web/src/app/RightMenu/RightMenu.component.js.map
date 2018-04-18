@@ -1,0 +1,1 @@
+{"version":3,"file":"RightMenu.component.js","sourceRoot":"","sources":["RightMenu.component.ts"],"names":[],"mappings":";;;;;;;;AAAA,sCAAwC;AAOxC,IAAa,kBAAkB;IAA/B;IAAkC,CAAC;IAAD,yBAAC;AAAD,CAAC,AAAnC,IAAmC;AAAtB,kBAAkB;IAL9B,gBAAS,CAAC;QACP,QAAQ,EAAE,MAAM,CAAC,EAAE;QACnB,QAAQ,EAAE,eAAe;QACzB,WAAW,EAAE,0BAA0B;KAC1C,CAAC;GACW,kBAAkB,CAAI;AAAtB,gDAAkB"}

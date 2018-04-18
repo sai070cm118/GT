@@ -1,0 +1,12 @@
+
+
+
+<div class="content-wrapper" (changeOpacity)='changeContentOpacity($event)' [style.opacity]="contentOpacity">
+  <section class="content">
+    <Account *ngIf="currentView==3"></Account>
+    <Dashboard *ngIf="currentView==0"></Dashboard>
+    <Gameboard *ngIf="currentView==1"></Gameboard>
+    <Profile *ngIf="currentView==2"></Profile>
+    <Settings *ngIf="currentView==4"></Settings>
+  </section>
+</div>

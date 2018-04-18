@@ -1,0 +1,26 @@
+ <ul class="sidebar-menu">
+        
+        <li *ngFor="let treeItem of treeItems; let i=index;" class="treeview" [class.active]='isActiveTree==i'>
+          <a (click)="expandTree(i)">
+              <i [class]="treeItem.icon"></i>
+              <span>{{treeItem.menuItem}}</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+                <span *ngFor="let rightItem of treeItem.rightContent" class="label label-primary pull-right">{{rightItem.title}}</span>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li *ngFor="let subMenu of treeItem.subMenu; let j =index;" [class.active]='isSubActiveTree==j'>
+                <a (click)="selectTree(j)">
+                  <i [class]="subMenu.icon"></i>
+                  {{subMenu.subMenuItem}}
+                  <span class="pull-right-container">
+                    <span *ngFor="let subRightItem of subMenu.rightContent" class="label label-primary pull-right">{{subRightItem.title}}</span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+        
+        </li>
+
+      </ul>

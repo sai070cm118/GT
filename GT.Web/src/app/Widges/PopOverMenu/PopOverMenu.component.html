@@ -1,0 +1,53 @@
+
+<div class="navbar-custom-menu">
+    <ul class="nav navbar-nav">
+         
+        <li *ngFor="let dropItem of propOverDropdowns; let i=index" class="dropdown messages-menu" [class.open]='expandedPopover == i' (click)='popoverClicked($event,i)'>
+             <a   class="dropdown-toggle" data-toggle="dropdown">
+                <i [class]="dropItem.icon"></i>
+                <span class="label label-success">{{dropItem.body.length}}</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="header">{{dropItem.heading}}</li>
+                <li *ngIf="!dropItem.isSmallList"><app-MediumList [listItems]="dropItem.body"></app-MediumList></li>
+                <li *ngIf="dropItem.isSmallList"><app-SimpleList [listItems]="dropItem.body"></app-SimpleList></li>
+                <li class="footer"><a >{{dropItem.footer}}</a></li>
+            </ul>
+        </li>
+
+
+        <!-- User Account: style can be found in dropdown.less -->
+        <li *ngIf="_Globals.Profile!=undefined" class="dropdown user user-menu"  [class.open]='expandedPopover == 106' (click)='popoverClicked($event,106)'>
+            <a   class="dropdown-toggle" data-toggle="dropdown">
+                <img [src]="(_Globals.Profile == undefined ? '' : _Globals.Profile.ProfilePic)" onError="this.src='./Content/Images/profile.png';" class="user-image" alt="User Image">
+                <span class="hidden-xs">{{_Globals.Profile == undefined ? '' :_Globals.Profile.ProfileName}}</span>
+            </a>
+            <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                <img [src]="(_Globals.Profile == undefined ? '' : _Globals.Profile.ProfilePic)"  onError="this.src='./Content/Images/profile.png';" class="img-circle" alt="User Image">
+
+                <p>
+                    {{_Globals.Profile == undefined ? '' :_Globals.Profile.ProfileName}}
+                    <small>{{_Globals.Profile == undefined ? '' :_Globals.Profile.Email}}</small>
+                </p>
+                </li>
+                
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                <div class="pull-left">
+                    <a   class="btn btn-info btn-flat" (click)='profileView($event)'>Profile</a>
+                </div>
+                <div class="pull-right">
+                    <a   class="btn btn-info btn-flat"   (click)='signOut($event)'>Sign out</a>
+                </div>
+                </li>
+            </ul>
+        </li>
+        <!-- Control Sidebar Toggle Button 
+        <li>
+            <a   data-toggle="control-sidebar"  (click)='popoverClicked($event,4)'><i class="fa fa-gears"></i></a>
+        </li>
+        -->
+    </ul>
+</div>

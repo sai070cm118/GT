@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+.contacts-list-msg {
+    font-size:14px;
+}
+
+
+.item:hover{
+    cursor: pointer;
+    background-color: #f4f4f4;
+}
+.item:active{
+    cursor: pointer;
+    background-color: #eee;
+}

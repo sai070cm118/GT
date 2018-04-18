@@ -1,0 +1,16 @@
+<ul class="contacts-list" *ngIf="_Globals!=undefined && _Globals.CurrentGroupData!=undefined">
+    <li  *ngFor="let message of _Globals.CurrentGroupData.Messages">
+        <a >
+            <img alt="User Image" class="contacts-list-img" [src]="group" onError="this.src='./Content/Images/profile.png';" >
+
+            <div class="contacts-list-info">
+                <span class="contacts-list-name">
+                    {{message.message}}
+                    <small class="contacts-list-date pull-right">Time</small>
+                </span>
+            <span class="contacts-list-msg">Text</span>
+            </div>
+            
+        </a>
+    </li>
+</ul>

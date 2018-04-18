@@ -1,0 +1,62 @@
+<div class="register-box">
+ <div class="login-logo">
+    <!--<a [routerLink]="['/register']"><b>Admin</b>LTE</a>-->
+  </div>
+  <div class="register-box-body" *ngIf="RecoverWindowType==1 ">
+    <p class="login-box-msg">Recover Account</p>
+
+    <form action="../../index.html" method="post">
+      
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" placeholder="Email or Mobile No" [(ngModel)]='user.Email' [ngModelOptions]="{standalone: true}"/>
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="row">
+        
+        <!-- /.col -->
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-primary btn-block btn-flat" (click)='recoverAccount($event)'>Recover Account</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+  </div>
+
+  
+  <div class="register-box-body"  *ngIf="RecoverWindowType==2|| RecoverWindowType==4">
+    <p class="login-box-msg">Choose New Password</p>
+
+    <form action="../../index.html" method="post">
+      
+      <div class="form-group has-feedback" *ngIf="RecoverWindowType==2">
+        <input type="text" class="form-control" placeholder="Otp" [(ngModel)]='user.RecoverHash' [ngModelOptions]="{standalone: true}"/>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+
+      <div class="form-group has-feedback">
+        <input type="Password" class="form-control" placeholder="Password" [(ngModel)]='user.Password' [ngModelOptions]="{standalone: true}"/>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+
+
+      <div class="row">
+        
+        <!-- /.col -->
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-primary btn-block btn-flat" (click)='recoverPassword($event)'>Update Password</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+  </div>
+
+
+  <div class="register-box-body"  *ngIf="RecoverWindowType==3">
+      <p class="login-box-msg">Your recover link has been sent you your email. Please open that link.
+    </div>
+
+
+  <!-- /.form-box -->
+</div>
+<!-- /.register-box -->
+

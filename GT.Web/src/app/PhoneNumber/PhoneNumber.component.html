@@ -1,0 +1,39 @@
+﻿<div class="register-box">
+  <div class="register-logo">
+    <a><b>Admin</b>LTE</a>
+  </div>
+
+  <div class="register-box-body">
+    <p class="login-box-msg">Mobile number</p>
+
+    <form action="../../index.html" method="post">
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" placeholder="Phone Number" [(ngModel)]='profile.User.Mobile' [ngModelOptions]="{standalone: true}">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <!-- /.col -->
+        
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-primary btn-block btn-flat" (click)='addMobileNo($event)'>Send OTP</button>
+        </div>
+        <!-- /.col -->
+      </div>
+      <p></p>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="OTP"  [(ngModel)]='profile.User.MobileOtp' [ngModelOptions]="{standalone: true}">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <!-- /.col -->
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-primary btn-block btn-flat" (click)='verifyMobile($event)'>Verify OTP</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+  </div>
+  <!-- /.form-box -->
+</div>
+<!-- /.register-box -->

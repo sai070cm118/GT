@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/a4a53b97b8dcdf99173e3c0d5d9e463e71aae7a1/passport-facebook/index.d.ts",
+    "raw": "registry:dt/passport-facebook#2.1.1+20170214022118",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/a4a53b97b8dcdf99173e3c0d5d9e463e71aae7a1/passport-facebook/index.d.ts"
+  }
+}

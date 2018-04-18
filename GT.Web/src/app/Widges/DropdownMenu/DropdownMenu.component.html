@@ -1,0 +1,8 @@
+<div class="btn-group" [class.open]='isOpenedDropdown'>
+    <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown" aria-expanded="false" (click)='toggleDropdown($event)'>
+    <i class="fa fa-wrench"></i></button>
+
+    <ul class="dropdown-menu" role="menu">
+        <li *ngFor='let item of settingList' [class.divider]='item.isDivider' ><a href="#">{{item.title}}</a></li>
+    </ul>
+</div>

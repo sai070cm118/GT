@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/8789bb745d0cd89be97cde071ec55916e02536a3/passport-twitter/index.d.ts",
+    "raw": "registry:dt/passport-twitter#1.0.4+20161208185114",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/8789bb745d0cd89be97cde071ec55916e02536a3/passport-twitter/index.d.ts"
+  }
+}
