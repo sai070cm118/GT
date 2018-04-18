@@ -1,0 +1,9 @@
+﻿{
+  "gtconfigurationmanager": "gtconfigurationmanager",
+  "gterrorlogger": "gterrorlogger",
+  "gtnotificationmanager": "gtnotificationmanager",
+  "gtproxyservice": "gtproxyservice",
+  "gtscuritymanager": "gtscuritymanager",
+  "gtrepository": "gtrepository",
+  "gtservice": "gtservice"
+}

@@ -1,0 +1,7 @@
+cd/
+cd program files
+cd mongodb
+cd server
+cd 3.2
+cd bin
+mongod -dbpath="c:/intel/mongodata"

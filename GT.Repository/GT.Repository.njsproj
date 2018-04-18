@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Name>GT.Repository</Name>
+    <RootNamespace>GT.Repository</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>d4cdf54c-e7a1-41d3-9f2d-8e8aacd97a42</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>
+    </StartupFile>
+    <StartWebBrowser>False</StartWebBrowser>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <StartWebBrowser>false</StartWebBrowser>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="package.json" />
+    <Content Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+    <Folder Include="typings\" />
+    <Folder Include="typings\globals\" />
+    <Folder Include="typings\globals\node\" />
+    <Folder Include="typings\modules\" />
+    <Folder Include="typings\modules\bookshelf\" />
+    <Folder Include="typings\modules\knex\" />
+    <Folder Include="typings\modules\mysql\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="typings\globals\node\index.d.ts" />
+    <TypeScriptCompile Include="typings\index.d.ts" />
+    <TypeScriptCompile Include="typings\modules\bookshelf\index.d.ts" />
+    <TypeScriptCompile Include="typings\modules\knex\index.d.ts" />
+    <TypeScriptCompile Include="typings\modules\mysql\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Repositories\AccountRepository.js" />
+    <Compile Include="Repositories\FriendRepository.js" />
+    <Compile Include="Repositories\GameGroupRepository.js" />
+    <Compile Include="Repositories\GameMessageRepository.js" />
+    <Compile Include="Repositories\GameTypeRepository.js" />
+    <Compile Include="index.js" />
+    <Compile Include="Repositories\MessageRepository.js" />
+    <Compile Include="Repositories\Models.js" />
+    <Compile Include="Repositories\MongoUserRepository.js" />
+    <Compile Include="Repositories\OfflineMoneyRepository.js" />
+    <Compile Include="Repositories\OfflineTransactionTypeRepository.js" />
+    <Compile Include="Repositories\ProfileRepository.js" />
+    <Compile Include="Repositories\RunningGameRepository.js" />
+    <Compile Include="Repositories\TransactionRepository.js" />
+    <Compile Include="Repositories\TransactionStatusRepository.js" />
+    <Compile Include="Repositories\TransactionTypeRepository.js" />
+    <Compile Include="Repositories\UserGroupRepository.js" />
+    <Compile Include="Repositories\UserRepository.js" />
+  </ItemGroup>
+  <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
+</Project>

@@ -1,0 +1,7 @@
+UserStates
+
+1.  Registered
+2.  Password required
+3. Email Verification required
+4. Mobile Verification required
+5. Completed

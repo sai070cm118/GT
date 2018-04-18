@@ -1,0 +1,20 @@
+Tasks List
+
+Login with fb or google
+
+
+Record email and mobile 
+If mobile not available capture that at next stage.
+
+
+
+
+
+and create the session
+
+Register with fb or google
+
+Record email and mobile 
+
+
+In both conditions if its first time capture the password for login from next time.

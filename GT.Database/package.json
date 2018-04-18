@@ -1,0 +1,9 @@
+{
+  "name": "gt.database",
+  "version": "0.0.0",
+  "description": "GT.Database",
+  "main": "app.js",
+  "author": {
+    "name": "sbldsk"
+  }
+}

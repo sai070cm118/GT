@@ -1,0 +1,18 @@
+14 Nov 2016	Login Page setup, configure Application setup, Socket server, Notification server, Web api and Web application, Redis and session management.
+15 Nov 2016	Setup Mysql and MongoDB. [Mysql=(Account, Transaction), MongoDB= (Games, Playing)]). Conclude the DB Structure.
+16 Nov 2016	Finish Login, Registration, facebook, google Plus, Forgot Password,Reset Password, Verify Email, Verify Mobile
+17 Nov 2016 Email Service, Otp Setup, Chat App Setup,
+18 Nov 2016 
+19 Nov 2016
+20 Nov 2016
+21 Nov 2016
+22 Nov 2016
+23 Nov 2016
+24 Nov 2016
+25 Nov 2016
+26 Nov 2016
+27 Nov 2016
+28 Nov 2016
+29 Nov 2016
+30 Nov 2016
+31 Nov 2016

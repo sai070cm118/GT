@@ -1,0 +1,20 @@
+
+Currencies INR and USD
+Internally Operate on INR only [Paisas]
+
+1. Online shopping
+2. Google adds
+3. collect money form users [1R - 1000R INR], [1Cent - 10$ USD] per Day Money adding.
+	1. INR - Paytm money transfer. By mobile he will transfer. Then we will otherize the details.
+	2. USD - Collect the currency from Paypal. [Will substract the Conversion charges.]
+	3. INR - Will integrate the Online recharge Like acharya. [Will do the recharge user by user.]
+	
+We will Pay through the paytm wallet, Mobile recharge, USD PayPal Transfer.
+
+
+**To achieve the google ads its difficult to get into Gambling. So we will open anothe website and register for that to include adds.
+
+
+
+
+

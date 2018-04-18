@@ -1,0 +1,18 @@
+{
+    "LocalApiServer":"def",
+    "TestApiServer":"def",
+    "ProductionApiServer":"def",
+
+    "LocalSocketServer":"def",
+    "TestSocketServer":"def",
+    "ProductionSocketServer":"def",
+
+    "LocalNotificationServer":"def",
+    "TestNotificationServer":"def",
+    "ProductionNotificationServer":"def",
+    
+    "LocalWebServer":"def",
+    "TestWebServer":"def",
+    "ProductionWebnServer":"def"
+
+}

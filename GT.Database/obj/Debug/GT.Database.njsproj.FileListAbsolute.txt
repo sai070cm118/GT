@@ -1,0 +1,2 @@
+C:\VisualCode\GT\GT.Database\obj\Debug\GT.Database.njsprojResolveAssemblyReference.cache
+C:\VisualCode\GT\GT.Database\bin\Microsoft.NodejsTools.WebRole.dll

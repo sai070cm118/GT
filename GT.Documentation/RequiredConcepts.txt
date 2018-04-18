@@ -1,0 +1,14 @@
+Jquery Including in angular2
+Dynamic component loader
+visual studio for angular2
+Mongo DB Material
+passport js [Facebook, Google, local and keepme]
+Handle transactions in mongodb
+Best scheduler in Nodejs
+Follow up the Socket IO with Angular2.
+Transactions in MongoDB
+Look into achrya sms.
+Install the android software.
+
+
+

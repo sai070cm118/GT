@@ -1,0 +1,9 @@
+{
+  "name": "gt.sdk.packages",
+  "version": "0.0.0",
+  "description": "GT.SDK.Packages",
+  "main": "app.js",
+  "author": {
+    "name": "sbldsk"
+  }
+}

@@ -1,0 +1,72 @@
+Run solution in the following way with same order
+
+1) Mongo DB
+
+    cd/
+    cd program files
+    cd mongodb
+    cd server
+    cd 3.4
+    cd bin
+    mongod -dbpath="c:/intel/mongodata"
+
+2) Webservice (3002)
+
+    cd GT.WEBAPI
+    nodemon app.js
+
+3) WebApplication  (3000,3001)
+
+
+    For ng app
+
+    cd GT.Web
+    ng serve --port 3001
+
+    ========
+
+    For app
+    
+    cd GT.Web
+    ng build
+    nodemon app.js
+
+
+
+4) Notificaton server (3003)
+
+    cd GT.NotificationService
+    nodemon app.js
+
+5) SocketService (3004)
+
+    cd GT.SocketService
+    nodemon ./bin/www
+
+-------------
+
+DB Migration
+
+1) Set databse Name
+2) Cd MigrateFiles
+3) node migrate.js (Schema.js file must be require and it has the table definition.)
+
+
+--------------
+
+Run Scheduler UI
+(Require Agenda Agendash)
+
+1) cd node_modules
+2)cd .bin
+3)agendash --db=mongodb://localhost/agendaDb --collection=agendaCollection --port=3001
+
+--------------
+
+Make local packages as link
+Go to the package and set command
+npm link
+
+Then use this package at your application.
+
+npm link <packagename>

@@ -1,0 +1,51 @@
+create group
+    {false,null,[1,2],[]}
+
+getgroup by id
+    in : {groupid}
+    Out: {[participients]}
+
+add participients
+    check : getgroup by id
+        in : {[participients]}
+
+removeparticipient
+    check : getgroup by id
+        in : {[participients]}
+
+add message
+    check : getgroup by id
+        in : {[message]}
+
+get previous message
+    check : getgroup by id
+        in : {[objectId]} //message id
+        Out: {[message]}  //top recent 10 messages,
+                          // lessthan objectId
+
+
+
+----------------------------------------
+
+
+
+creat group
+    in : {gameid}
+
+get group by id
+    in: {_gameid}
+    Out: {[participients]}
+
+add participients
+    get group by id
+        in:{[participients]}
+
+
+add message
+    get group by id
+        in:{[message]}
+
+get previous message
+    get group by id
+        in:{[objectId]}
+        Out: {[messages]}

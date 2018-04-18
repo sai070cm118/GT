@@ -1,0 +1,6 @@
+
+Message from Server to Client
+socket.emit('StoC', 'Message from server');	
+
+Message from Client to Server
+this.socket.emit('CtoS', 'Message From Client.'); 

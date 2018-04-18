@@ -1,0 +1,19 @@
+{
+  "name": "joi-test",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "description": "joi",
+  "author": {
+    "name": "",
+    "email": ""
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-joi-validator": "^2.0.0",
+    "joi": "^13.0.2"
+  }
+}

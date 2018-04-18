@@ -1,0 +1,43 @@
+Ajax:
+
+	User Settings:
+
+		Login [Different Strategies]
+		Register
+		Forgot password
+		Home page
+
+	Profile settings:
+
+		Details update
+
+	Account Settings:
+
+		Add money
+			By paytm wallet transfer
+			By user mobile recharge.
+			By Paypal transfer.
+			Coins to Wallet conversion.
+			
+		withdraw money request.
+		Wallet to Coins conversion.
+
+Socket:
+
+	Set my online status.
+	Get notifications.
+	Get friends online status.
+	Send chat message.
+	Receive chat message.
+	Bet on games.
+	Get game notifications.
+	Get game status.
+	Get my betting games.
+	Coins updates.
+	Get my games history.
+	Get my games statistics.
+	Get betting of my friends.
+	
+	
+	
+	

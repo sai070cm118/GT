@@ -1,0 +1,127 @@
+import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
+import {IProfile} from '../models/model';
+
+
+@Injectable()
+export class MenuService{
+
+    getMenu():any{
+        return [
+            {
+                menuItem:"Piiii",
+                icon:"fa-files-o fa",
+                rightContent:[
+                ],
+                subMenu:[
+                    {
+                        subMenuItem:"GPiii1",
+                        icon:"fa-circle-o fa",
+                        rightContent:[
+                            {title:"1"},
+                            {title:"2"}
+                        ]
+                    },
+                    {
+                        subMenuItem:"GPiii2",
+                        icon:"fa-circle-o fa",
+                        rightContent:[
+                            {title:"1"},
+                            {title:"2"}
+                        ]
+                    },
+                    {
+                        subMenuItem:"GPiii3",
+                        icon:"fa-circle-o fa",
+                        rightContent:[
+                            {title:"1"},
+                            {title:"2"}
+                        ]
+                    }
+                ]
+            },
+            {
+                menuItem:"dashboard",
+                icon:"fa fa-dashboard",
+                rightContent:[
+                ],
+                subMenu:[
+                    {
+                        subMenuItem:"Dash1",
+                        icon:"fa-circle-o fa",
+                        rightContent:[
+                            {title:"1"},
+                            {title:"2"}
+                        ]
+                    },
+                    {
+                        subMenuItem:"Dash2",
+                        icon:"fa-circle-o fa",
+                        rightContent:[
+                            {title:"1"},
+                            {title:"2"}
+                        ]
+                    },
+                    {
+                        subMenuItem:"Dash3",
+                        icon:"fa-circle-o fa",
+                        rightContent:[
+                            {title:"1"},
+                            {title:"2"}
+                        ]
+                    }
+                ]
+            },
+            {
+                menuItem:"Notificatio1",
+                icon:"fa-files-o fa",
+                rightContent:[
+                ],
+                subMenu:[
+                    {
+                        subMenuItem:"GPiii1",
+                        icon:"fa-circle-o fa",
+                        rightContent:[
+                            {title:"1"},
+                            {title:"2"}
+                        ]
+                    },
+                    {
+                        subMenuItem:"GPiii2",
+                        icon:"fa-circle-o fa",
+                        rightContent:[
+                            {title:"1"},
+                            {title:"2"}
+                        ]
+                    }
+                ]
+            },
+            {
+                menuItem:"Notificatio2",
+                icon:"fa-files-o fa",
+                rightContent:[
+                    {title:"1"},
+                    {title:"2"}
+                ],
+                subMenu:[
+                    {
+                        subMenuItem:"GPiii1",
+                        icon:"fa-circle-o fa",
+                        rightContent:[
+                            {title:"1"},
+                            {title:"2"}
+                        ]
+                    },
+                    {
+                        subMenuItem:"GPiii2",
+                        icon:"fa-circle-o fa",
+                        rightContent:[
+                            {title:"1"},
+                            {title:"2"}
+                        ]
+                    }
+                ]
+            }
+        ];
+    }
+}

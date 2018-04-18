@@ -1,0 +1,1 @@
+C:\VisualCode\GT\GT.Documentation\bin\Microsoft.NodejsTools.WebRole.dll

@@ -1,0 +1,19 @@
+{
+  "name": "SocketConnection",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "description": "SocketConnection",
+  "author": {
+    "name": "SBLDSK014",
+    "email": ""
+  },
+  "dependencies": {
+    "gt.configurationmanager": "../SDK.Packages/gt.configurationmanager",
+    "gt.errorlogger": "../SDK.Packages/gt.errorlogger",
+    "gt.securitymanager": "file:///C:\\Intel\\20170423\\sdk.packages\\gt.securitymanager",
+    "request": "^2.81.0"
+  }
+}

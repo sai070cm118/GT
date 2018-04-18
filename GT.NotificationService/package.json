@@ -1,0 +1,18 @@
+{
+  "name": "Notification",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "description": "Notification",
+  "author": {
+    "name": "SBLDSK014",
+    "email": ""
+  },
+  "dependencies": {
+    "agenda": "^0.9.1",
+    "express": "^4.15.3",
+    "request": "^2.83.0"
+  }
+}

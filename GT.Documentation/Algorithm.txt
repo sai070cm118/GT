@@ -1,0 +1,35 @@
+1)When page loading
+	a)Check the token is ok
+	b)if ok then main page will be loading
+	c)if not ok then sends the refresh token
+	d)if refresh token ok then will send now token and load page
+	e)if refresh token expire then login page will load.
+	
+2) When Login
+	a) Send credentials
+		1) If credentials ok then send refresh token and normal token will send
+		2) Load the main page and store the token in webstorage
+	b) Login with fb or g+
+		1) Authentication ok then send web page with special url
+		2) Store the token with little bit timestamp ( Token, RefreshToken, Timestamp)
+		3) Load the page with return url and send the request for consume token
+		4) If token available send the token remove form temp storage
+		5) Else load login page again.
+		
+3) Registration process
+	a) Provide details
+		1) Send the email and otp
+		2) Verify the email
+		3) Verify the mobile
+	b) Login with fb or g+
+		1) Get the details from api
+		2) Verify the email
+		3) Choose new password
+		4) Provide the mobile
+		
+4) socket connection (Need R&D)
+	a) Connect with the token
+	b) if token ok then connects
+	c) else reject connection.
+	
+	
