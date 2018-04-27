@@ -11,7 +11,6 @@ export class HttpClientWraper {
   }
 
   get(url) {
-    console.log(url);
     let headers = new Headers();
     this.createAuthorizationHeader(headers);
     return this.http.get(url, {
@@ -20,7 +19,6 @@ export class HttpClientWraper {
   }
 
   post(url, data) {
-    console.log(url);
     let headers = new Headers();
     this.createAuthorizationHeader(headers);
     return this.http.post(url, data, {

@@ -10,7 +10,6 @@ export class ChatMessageListComponent {
 
     constructor(private _Globals:AppData){
 
-        console.log(_Globals);
     }
     @Input() selectedUser=-1;
 

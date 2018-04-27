@@ -152,7 +152,6 @@ export class SocketFunctions {
           
     initializeData(){
 
-      console.log('Coming');
       //Observable.interval(1000).map(tick => (new Date().getTime()) + ((new Date().getTimezoneOffset()) * 60000)).share().subscribe(time => {this.currentTime = time;});
 
       this._appData.Profile=new IProfile();

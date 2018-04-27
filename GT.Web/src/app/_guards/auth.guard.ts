@@ -23,11 +23,6 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-
-
-        console.log(state.url);
-
-        
         if(state.url=='/logout'){
             localStorage.removeItem('Token');
             this.router.navigate(['/login']);
@@ -37,11 +32,9 @@ export class AuthGuard implements CanActivate {
         else if (localStorage.getItem('Token')!=undefined) {
 
             return  this.userService.validateToken(localStorage.getItem('Token')).map(validateResult => {
-                console.log(validateResult);
                 if(!validateResult.error){
                     this.UserState=validateResult.data.Status;
 
-                    console.log(this.UserState);
 
                     if(this.UserState==1){ 
             
@@ -96,7 +89,6 @@ export class AuthGuard implements CanActivate {
             }); 
         }
         else{
-            console.log(state.url);
             if(state.url=='/login'){
                 return true;
             }
@@ -108,7 +100,6 @@ export class AuthGuard implements CanActivate {
             }
             else{
 
-                //console.log(state.root.firstChild);
                 if(state.root.firstChild.url[0]!=undefined && state.root.firstChild.url[0].path!=undefined && state.root.firstChild.url[0].path=='login'){
                     return this.userService.validateToken(route.params.id).map(validateResult => {
                         if(!validateResult.error){

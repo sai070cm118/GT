@@ -128,8 +128,8 @@ export class GameboardComponent {
                 {text:'Label2'}
             ],
             images:[
-                {src:'content/img/user2-160x160.jpg',id:'',tag:'3'},
-                {src:'content/img/user2-160x160.jpg',id:'',tag:'2'}
+                {src:'Content/img/user2-160x160.jpg',id:'',tag:'3'},
+                {src:'Content/img/user2-160x160.jpg',id:'',tag:'2'}
             ],
             chat:false,
             isChatBox:false,

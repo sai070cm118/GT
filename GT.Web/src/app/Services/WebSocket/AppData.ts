@@ -12,8 +12,6 @@ import {
     MessageService,
     NotificationService,
     ChatBoxService,
-    ChatService,
-    BoxControlService
   }  from '../index';
 
 

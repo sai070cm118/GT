@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 
-import { IUser } from '../models/model';
+import { IUser } from '../Services/WebSocket/Models';
 import { UserService } from '../Services/index';
 
 @Component({

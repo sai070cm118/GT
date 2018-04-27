@@ -72,7 +72,6 @@ import {
     MessageService,
     NotificationService,
     ChatBoxService,
-    BoxControlService,
     SocketManager,
     HttpClientWraper
 } from './Services/index';
@@ -143,7 +142,6 @@ import {
         MessageService,
         NotificationService,
         ChatBoxService,
-        BoxControlService,
         HttpClientWraper,
         
         //Global values

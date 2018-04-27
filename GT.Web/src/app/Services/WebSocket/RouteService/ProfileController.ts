@@ -6,7 +6,7 @@ import { SocketFunctions } from '../SocketFunctions/SocketFunctions'
 import {
     ISocketMessage,
     IUserGroup
-} from '../../../models/model';
+} from '../Models';
 
 @Injectable()
 export class ProfileController {
@@ -138,7 +138,6 @@ export class ProfileController {
             }
             else if(messageData.Type=="GetMyJoinedGames"){
         
-            console.log(messageData);
             if(messageData!=undefined){
                 messageData.data.MyBettedPaidGames.forEach(element => {
                 this._appData.Profile.MyBettedPaidGames.push(element.GameId);
@@ -168,7 +167,6 @@ export class ProfileController {
         
             }
             
-            console.log(this._appData.Profile);
     }
 
 }

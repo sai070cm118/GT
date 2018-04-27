@@ -20,8 +20,8 @@ export class ChatBoxService{
             close:true,
             lables:[{}],
             images:[
-                {src:'content/img/user2-160x160.jpg',id:'',tag:'3'},
-                {src:'content/img/user2-160x160.jpg',id:'',tag:'2'}
+                {src:'Content/Images/user2-160x160.jpg',id:'',tag:'3'},
+                {src:'Content/Images/user2-160x160.jpg',id:'',tag:'2'}
             ],
             chat:true,
             isChatBox:true,

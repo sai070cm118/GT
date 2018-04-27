@@ -20,7 +20,6 @@ export class ChatProfileListComponent {
         private _socketFunctions:SocketFunctions
     ){
 
-        console.log(_Globals);
     }
 
     selectUser($user:any){

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router,ActivatedRoute, Params  } from '@angular/router';
-import {IUser} from '../models/model';
+import {IUser} from '../Services/WebSocket/Models';
 import {UserService} from '../Services/index';
 
 

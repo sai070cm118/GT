@@ -3,7 +3,7 @@ import {Component, Input, Output, EventEmitter, OnInit,OnDestroy, ViewChild, Ele
 
 import { Router } from '@angular/router';
 
-import {IProfile} from '../models/model';
+import {IProfile} from '../Services/WebSocket/Models';
 
 import {UserService} from '../Services/index';
 

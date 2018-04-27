@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import {IProfile} from '../models/model';
+import {IProfile} from '../Services/WebSocket/Models';
 import {Observable} from 'rxjs/Rx';
 import { HttpClientWraper } from './HttpClientWraper';
 

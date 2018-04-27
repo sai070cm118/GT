@@ -7,10 +7,8 @@ import {Component, Input} from '@angular/core';
 })
 export class ContentPlaceholderComponent { 
 
-    @Input() boxControls:any;
     @Input() contentOpacity=1;
     @Input() currentView:number;
     
-    @Input() profileDetails;
 
 }

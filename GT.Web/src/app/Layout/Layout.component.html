@@ -2,7 +2,7 @@
 
   <app-header (viewProfile)="viewProfiles($event)" (togglesideMenu)='togglesideMenu($event)' [proverItems]='configuarion.popOver' ></app-header>
   <app-LeftMenu (updaateContent)="updaateContents($event)" [treeItems]='configuarion.treeItems'></app-LeftMenu>
-  <app-ContentPlaceholder [profileDetails]="configuarion.profileInfo" [currentView]="currentView" [contentOpacity]='contentOpacity' [boxControls]='configuarion.boxControls'></app-ContentPlaceholder>
+  <app-ContentPlaceholder [currentView]="currentView" [contentOpacity]='contentOpacity' ></app-ContentPlaceholder>
   <app-Footer></app-Footer>
   <app-RightMenu></app-RightMenu>
   <app-Chat  (changeOpacity)='changeContentOpacity($event)'  [boxControls]='configuarion.chatBoxControls' (sendMessage)='sendMessage($event)'></app-Chat>

@@ -18,14 +18,13 @@ import {
     MenuService,
     MessageService,
     NotificationService,
-    ChatBoxService,
-    BoxControlService
+    ChatBoxService
  }  from '../Services/index';
 
 import {
     IProfile,
     IUser
-} from '../models/model';
+} from '../Services/WebSocket/Models';
 
 
 @Component({
@@ -50,10 +49,7 @@ export class LayoutComponent {
 
 
     configuarion={
-        Profile:AppData,
-        boxControls:{},
         chatBoxControls:{},
-        chatHistory:[],
         treeItems:[],
         popOver:[]
     };
@@ -69,7 +65,6 @@ export class LayoutComponent {
         private _MessageService:MessageService,
         private _NotificationService:NotificationService,
         private _ChatBoxService:ChatBoxService,
-        private _BoxControlService:BoxControlService,
         private _Globals: AppData
     ){
 
@@ -80,7 +75,6 @@ export class LayoutComponent {
         this.configuarion.popOver.push(this._MessageService.getMessagePopup());
         this.configuarion.popOver.push(this._NotificationService.getNotificationPopup());
         this.configuarion.chatBoxControls=this._ChatBoxService.getChatBox();
-        this.configuarion.boxControls=this._BoxControlService.getBoxControl();
     }
    
 

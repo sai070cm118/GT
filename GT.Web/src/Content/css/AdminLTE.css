@@ -1543,7 +1543,7 @@ a:focus {
  */
 .box {
   position: relative;
-  border-radius: 3px;
+  /*border-radius: 3px;*/
   background: #ffffff;
   border-top: 3px solid #d2d6de;
   margin-bottom: 20px;
@@ -2605,7 +2605,7 @@ a:focus {
   border-radius: 3px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  padding: 10px 0;
+  padding: 10px 10px;
   background: #fff;
 }
 .products-list > .item:before,
@@ -4993,7 +4993,7 @@ table.text-center th {
 		padding-bottom:0px;
 	}
 	.box {
-		border-radius: 3px;
+		/*border-radius: 3px;*/
 	}
 	
 }

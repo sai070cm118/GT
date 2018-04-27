@@ -24,8 +24,9 @@
     "@angular/router": "^4.0.0",
     "concurrently": "^3.4.0",
     "core-js": "^2.4.1",
-    "gt.proxyservice": "../sdk.packages/gt.proxyservice",
-    "gt.securitymanager": "../sdk.packages/gt.securitymanager",
+    "cors": "^2.8.4",
+    "gt.proxyservice": "../gt.sdk.packages/gt.proxyservice",
+    "gt.securitymanager": "../gt.sdk.packages/gt.securitymanager",
     "ng-circle-progress": "^0.9.9",
     "ng-socket-io": "^0.2.4",
     "passport": "^0.3.2",
@@ -39,7 +40,7 @@
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@angular/cli": "1.0.0",
+    "@angular/cli": "^1.7.4",
     "@angular/compiler-cli": "^4.0.0",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",

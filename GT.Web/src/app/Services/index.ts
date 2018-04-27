@@ -1,6 +1,5 @@
 export * from './Profile.service';
 export * from './User.service';
-export * from './BoxControl.service';
 export * from './ChatBox.service';
 export * from './Menu.service';
 export * from './Message.service';

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
-import {IProfile} from '../models/model';
+import {IProfile} from '../Services/WebSocket/Models';
 
 
 @Injectable()

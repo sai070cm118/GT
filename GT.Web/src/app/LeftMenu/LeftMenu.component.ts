@@ -1,6 +1,6 @@
 import {Component, Input, Output, EventEmitter, OnInit,OnDestroy, ViewChild, ElementRef } from '@angular/core';
 
-import {IProfile} from '../models/model';
+import {IProfile} from '../Services/WebSocket/Models';
 import { ProfileService }  from '../Services/Profile.service';
 
 import { AppData } from '../Services/WebSocket/AppData';
