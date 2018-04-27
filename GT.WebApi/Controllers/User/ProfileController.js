@@ -11,6 +11,7 @@ var winstonConsole=require('gtlogger');
 Router.route('/')
     .get(SecurityManager.extractUserFromToken,function (req, res,next) {
 
+        console.log(req.body);
         _service.ProfileService.getById(req.body.UserId,function(result){
             req.result=result;
             next();

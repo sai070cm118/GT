@@ -129,6 +129,9 @@ var Repository={
             });
     },
     getById:function(id,callback){
+        
+        console.log('ID ==== ID');
+        console.log(id);
         Models.Profile
             .where({_id: id})
             .fetch({ withRelated: [{'User': function(qb) {
@@ -144,7 +147,6 @@ var Repository={
             })
             .catch(function (err) {
                 console.log(err);
-                ErrorLogger.error(err.message);
                 callback({error: true, data: {message: 'Unable to get profile.'}});
             });
     },

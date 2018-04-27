@@ -19,7 +19,6 @@ import {
     MessageService,
     NotificationService,
     ChatBoxService,
-    ChatService,
     BoxControlService
  }  from '../Services/index';
 
@@ -69,7 +68,6 @@ export class LayoutComponent {
         private _MenuService:MenuService,
         private _MessageService:MessageService,
         private _NotificationService:NotificationService,
-        private _ChatService:ChatService,
         private _ChatBoxService:ChatBoxService,
         private _BoxControlService:BoxControlService,
         private _Globals: AppData
@@ -81,7 +79,6 @@ export class LayoutComponent {
         this.configuarion.treeItems=this._MenuService.getMenu();
         this.configuarion.popOver.push(this._MessageService.getMessagePopup());
         this.configuarion.popOver.push(this._NotificationService.getNotificationPopup());
-        this.configuarion.chatHistory=this._ChatService.getFriends();
         this.configuarion.chatBoxControls=this._ChatBoxService.getChatBox();
         this.configuarion.boxControls=this._BoxControlService.getBoxControl();
     }

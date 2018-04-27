@@ -68,12 +68,10 @@ import {RemainTimePipe} from './Filters/RemainTimePipe';
 import {
     ProfileService,
     UserService,
-    GroupMessageService,
     MenuService,
     MessageService,
     NotificationService,
     ChatBoxService,
-    ChatService,
     BoxControlService,
     SocketManager,
     HttpClientWraper
@@ -129,7 +127,6 @@ import {
     providers: [
         AuthGuard,
         UserService,
-        GroupMessageService,
         HttpClientModule,
         DataRouteManager,
         AppSocket,
@@ -145,7 +142,6 @@ import {
         AppConfig,
         MessageService,
         NotificationService,
-        ChatService,
         ChatBoxService,
         BoxControlService,
         HttpClientWraper,

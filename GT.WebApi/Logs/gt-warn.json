@@ -3626,3 +3626,41 @@
 {"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":11892,"level":50,"msg":"Undefined binding(s) detected when compiling SELECT query: select `Profile`.* from `Profile` where `_id` = ? limit ?","time":"2018-04-18T18:10:47.213Z","v":0}
 {"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":11892,"level":50,"msg":"debug Unable to get profile.","time":"2018-04-18T18:10:47.213Z","v":0}
 {"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":11892,"level":50,"msg":"debug undefined","time":"2018-04-18T18:13:13.076Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":11892,"level":50,"msg":"debug undefined","time":"2018-04-18T18:22:17.348Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":11892,"level":50,"msg":"debug undefined","time":"2018-04-18T18:22:31.993Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":11892,"level":50,"msg":"debug undefined","time":"2018-04-18T18:24:39.107Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":11892,"level":50,"msg":"debug undefined","time":"2018-04-18T18:25:59.807Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":7268,"level":50,"msg":"Undefined binding(s) detected when compiling SELECT query: select `Profile`.* from `Profile` where `_id` = ? limit ?","time":"2018-04-26T17:17:29.201Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":7268,"level":50,"msg":"debug Unable to get profile.","time":"2018-04-26T17:17:29.207Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":7268,"level":50,"msg":"Undefined binding(s) detected when compiling SELECT query: select `Profile`.* from `Profile` where `_id` = ? limit ?","time":"2018-04-26T17:18:27.373Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":7268,"level":50,"msg":"debug Unable to get profile.","time":"2018-04-26T17:18:27.378Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":15592,"level":50,"msg":"Undefined binding(s) detected when compiling SELECT query: select `Profile`.* from `Profile` where `_id` = ? limit ?","time":"2018-04-26T17:19:59.008Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":15592,"level":50,"msg":"debug Unable to get profile.","time":"2018-04-26T17:19:59.015Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":15592,"level":50,"msg":"Undefined binding(s) detected when compiling SELECT query: select `Profile`.* from `Profile` where `_id` = ? limit ?","time":"2018-04-26T17:22:07.002Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":15592,"level":50,"msg":"debug Unable to get profile.","time":"2018-04-26T17:22:07.004Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":15592,"level":50,"msg":"Undefined binding(s) detected when compiling SELECT query: select `Profile`.* from `Profile` where `_id` = ? limit ?","time":"2018-04-26T17:22:11.585Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":15592,"level":50,"msg":"debug Unable to get profile.","time":"2018-04-26T17:22:11.588Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":15592,"level":50,"msg":"Undefined binding(s) detected when compiling SELECT query: select `Profile`.* from `Profile` where `_id` = ? limit ?","time":"2018-04-26T17:23:23.673Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":15592,"level":50,"msg":"debug Unable to get profile.","time":"2018-04-26T17:23:23.693Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13360,"level":50,"msg":"Undefined binding(s) detected when compiling SELECT query: select `Profile`.* from `Profile` where `_id` = ? limit ?","time":"2018-04-27T12:45:24.908Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13360,"level":50,"msg":"debug Unable to get profile.","time":"2018-04-27T12:45:24.913Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13360,"level":50,"msg":"Undefined binding(s) detected when compiling SELECT query: select `Profile`.* from `Profile` where `_id` = ? limit ?","time":"2018-04-27T12:46:24.380Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13360,"level":50,"msg":"debug Unable to get profile.","time":"2018-04-27T12:46:24.382Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13360,"level":50,"msg":"Undefined binding(s) detected when compiling SELECT query: select `Profile`.* from `Profile` where `_id` = ? limit ?","time":"2018-04-27T12:46:28.375Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13360,"level":50,"msg":"debug Unable to get profile.","time":"2018-04-27T12:46:28.378Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":18568,"level":50,"msg":"debug Unable to get profile.","time":"2018-04-27T12:49:57.602Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":7936,"level":50,"msg":"debug Unable to get profile.","time":"2018-04-27T12:50:55.723Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":1164,"level":50,"msg":"debug Unable to get profile.","time":"2018-04-27T12:52:25.366Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":12920,"level":50,"msg":"debug Unable to get profile.","time":"2018-04-27T12:53:37.303Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13588,"level":50,"msg":"debug Unable to get profile.","time":"2018-04-27T12:56:39.140Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13588,"level":50,"msg":"debug undefined","time":"2018-04-27T12:58:03.266Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13588,"level":50,"msg":"debug undefined","time":"2018-04-27T13:03:12.747Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13588,"level":50,"msg":"debug undefined","time":"2018-04-27T13:12:58.326Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13588,"level":50,"msg":"debug undefined","time":"2018-04-27T13:13:16.240Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13588,"level":50,"msg":"debug undefined","time":"2018-04-27T13:14:00.181Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13588,"level":50,"msg":"debug undefined","time":"2018-04-27T13:20:45.157Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13588,"level":50,"msg":"debug undefined","time":"2018-04-27T17:58:24.302Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13588,"level":50,"msg":"debug undefined","time":"2018-04-27T17:58:45.541Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13588,"level":50,"msg":"debug undefined","time":"2018-04-27T18:24:01.257Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13588,"level":50,"msg":"debug undefined","time":"2018-04-27T18:24:30.096Z","v":0}
+{"name":"ErrorLogger","hostname":"DESKTOP-H32670A","pid":13588,"level":50,"msg":"debug undefined","time":"2018-04-27T18:30:15.880Z","v":0}

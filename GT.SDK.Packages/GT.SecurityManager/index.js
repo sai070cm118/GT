@@ -19,6 +19,7 @@ function verifyToken(token,verificationCallback){
 //Middleware user on every request after login for Extract the user details form the token which is passend in autherization header.
 function extractUserFromToken(req, res, next) {  
 
+    console.log(req.headers['authorization']);
 
     if(req.headers['authorization']==null || req.headers['authorization']==undefined){
         console.log('No autherizaion headr present');

@@ -7,7 +7,7 @@ export class HttpClientWraper {
   constructor(private http: Http) {}
 
   createAuthorizationHeader(headers: Headers) {
-    headers.append('Authorization', localStorage.getItem('currentUser')); 
+    headers.append('Authorization', localStorage.getItem('Token')); 
   }
 
   get(url) {

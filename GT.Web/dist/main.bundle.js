@@ -25,52 +25,9 @@ var AppConfig = (function () {
         this._http = _http;
         this._appData = _appData;
         this.AppSocketConnectionURI = 'http://localhost:3004/AsUser';
-        this._appData.token = JSON.parse(localStorage.getItem('Token'));
     }
     AppConfig.prototype.getSessionToken = function () {
-        return this._appData.token == null ? undefined : this._appData.token.SessionToken;
-    };
-    AppConfig.prototype.getbackSessionToken = function (callback) {
-        if (localStorage.getItem('Token') == undefined || localStorage.getItem('Token') == null)
-            callback(undefined);
-        else
-            callback(JSON.parse(localStorage.getItem('Token')).SessionToken);
-    };
-    AppConfig.prototype.getRefreshToken = function () {
-        return this._appData.token == null ? undefined : this._appData.token.RefreshToken;
-    };
-    AppConfig.prototype.getbackRefreshToken = function (callback) {
-        if (localStorage.getItem('Token') == undefined || localStorage.getItem('Token') == null)
-            callback(undefined);
-        else
-            callback(JSON.parse(localStorage.getItem('Token')).RefreshToken);
-    };
-    AppConfig.prototype.getUserId = function () {
-        return this._appData.token == null ? undefined : this._appData.token.UserId;
-    };
-    AppConfig.prototype.getbackUserId = function (callback) {
-        if (localStorage.getItem('Token') == undefined || localStorage.getItem('Token') == null)
-            callback(undefined);
-        else
-            callback(JSON.parse(localStorage.getItem('Token')).UserId);
-    };
-    AppConfig.prototype.setToken = function (tokenObj) {
-        localStorage.setItem('Token', JSON.stringify(tokenObj));
-        this._appData.token = tokenObj;
-    };
-    AppConfig.prototype.removeToken = function () {
-        localStorage.removeItem('Token');
-        this._appData.token = undefined;
-    };
-    AppConfig.prototype.refreshToken = function () {
-        /* return new Promise((resolve, reject) => {
-            this._http.get(this.RefreshTokenURI, {headers:{'RefreshToken':this.getRefreshToken()}})
-              .subscribe(res => {
-                resolve(res);
-              }, (err) => {
-                reject(err);
-              });
-          }); */
+        return localStorage.getItem('Token');
     };
     return AppConfig;
 }());
@@ -233,6 +190,7 @@ var _a;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AppData__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__SocketFunctions_SocketFunctions__ = __webpack_require__(33);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfileController; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -245,9 +203,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var ProfileController = (function () {
-    function ProfileController(_appData) {
+    function ProfileController(_appData, injector) {
+        var _this = this;
         this._appData = _appData;
+        setTimeout(function () { return _this._socketFunctions = injector.get(__WEBPACK_IMPORTED_MODULE_2__SocketFunctions_SocketFunctions__["a" /* SocketFunctions */]); });
     }
     ProfileController.prototype.manageData = function (input) {
         var _this = this;
@@ -299,14 +260,14 @@ var ProfileController = (function () {
             this._appData.Profile.AppGames = messageData.data;
         }
         else if (messageData.Type == "GameCreated") {
-            //this._appData.getAccount();
+            this._socketFunctions.getAccount();
         }
         else if (messageData.Type == "GetAccount") {
             this._appData.Profile.Account = messageData.data;
         }
         else if (messageData.Type == "GetPaidRunningGames") {
             this._appData.Profile.PaidGames = messageData.data;
-            //this._appData.getGameGroupDetails(false);
+            this._socketFunctions.getGameGroupDetails(false);
         }
         else if (messageData.Type == "GetPaidRunningGame") {
             this._appData.Profile.PaidGames.find(function (x) { return x._id == messageData.data._id; }).RemainPositions = messageData.data.RemainPositions;
@@ -314,7 +275,7 @@ var ProfileController = (function () {
         }
         else if (messageData.Type == "GetFreeRunningGames") {
             this._appData.Profile.FreeGames = messageData.data;
-            //this._appData.getGameGroupDetails(true);
+            this._socketFunctions.getGameGroupDetails(true);
         }
         else if (messageData.Type == "GetFreeRunningGame") {
             console.log(messageData.data);
@@ -367,10 +328,10 @@ var ProfileController = (function () {
 }());
 ProfileController = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__AppData__["a" /* AppData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__AppData__["a" /* AppData */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__AppData__["a" /* AppData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__AppData__["a" /* AppData */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injector"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injector"]) === "function" && _b || Object])
 ], ProfileController);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=ProfileController.js.map
 
 /***/ }),
@@ -763,7 +724,7 @@ DashboardComponent = __decorate([
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Services_WebSocket_AppData__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Services_WebSocket_SocketFunctions_SocketFunctions__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Services_WebSocket_SocketFunctions_SocketFunctions__ = __webpack_require__(33);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GameboardComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1097,7 +1058,7 @@ SettingsComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Services_WebSocket_Models__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Services_WebSocket_AppData__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Services_WebSocket_SocketFunctions_SocketFunctions__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Services_WebSocket_SocketFunctions_SocketFunctions__ = __webpack_require__(33);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChatComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1269,7 +1230,7 @@ var _a;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Services_WebSocket_AppData__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Services_WebSocket_SocketFunctions_SocketFunctions__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Services_WebSocket_SocketFunctions_SocketFunctions__ = __webpack_require__(33);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChatProfileListComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2926,7 +2887,7 @@ TreeComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Services_index__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Services_WebSocket_AppData__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Services_WebSocket_SocketFunctions_SocketFunctions__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Services_WebSocket_SocketFunctions_SocketFunctions__ = __webpack_require__(33);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthGuard; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3100,7 +3061,7 @@ AppComponent = __decorate([
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(188);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http_testing__ = __webpack_require__(189);
@@ -3134,7 +3095,7 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__ApplicationComponents_Gameboard_index__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__ApplicationComponents_Profile_index__ = __webpack_require__(198);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__ApplicationComponents_Settings_index__ = __webpack_require__(200);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__Services_WebSocket_SocketFunctions_SocketFunctions__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__Services_WebSocket_SocketFunctions_SocketFunctions__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36_ng_socket_io__ = __webpack_require__(135);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36_ng_socket_io___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_36_ng_socket_io__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__Services_WebSocket_AppSocket__ = __webpack_require__(110);
@@ -3421,7 +3382,7 @@ var LoginComponent = (function () {
     LoginComponent.prototype.login = function ($event) {
         var _this = this;
         this.userService.login(this.profile).subscribe(function (data) {
-            localStorage.setItem('currentUser', data.Token);
+            localStorage.setItem('Token', data.Token);
             _this.router.navigateByUrl('/');
         }, function (error) {
         });
@@ -3527,7 +3488,7 @@ module.exports = "<!-- Main row -->\r\n      <div class=\"row\">\r\n        <!--
 /***/ 327:
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<!-- /.row -->\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <app-Box  [boxControls]='boxControls'>\r\n\r\n      <div class=\"body\"><div class=\"row\">\r\n          \r\n          <div class=\"col-md-12\">\r\n              <p class=\"text-center\">\r\n                <strong>My Betted Free Games</strong>\r\n              </p>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-12 col-lg-12 col-sm-12 col-xs-12\" style=\"background-color: gainsboro;padding:20px;box-sizing: border-box;\" *ngFor=\"let game of getParticipentedGames(true);\">\r\n                    <div  class=\"col-md-8 col-lg-8 col-sm-6 col-xs-12\"  style=\"background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;\"  (click)=\"_Globals.getAppGameByGameId(game._id,true)\">\r\n                    <table class=\"table table-striped\">\r\n                        <tbody>\r\n                          <tr>\r\n                            <td class=\"col-md-4\">RemainPositions</td>\r\n                            <td class=\"col-md-4\">{{game.RemainPositions}}</td>\r\n                          </tr>\r\n                          <tr>\r\n                            <td class=\"col-md-4\">StartOn</td>\r\n                            <td class=\"col-md-4\">{{game.StartOn}}</td>\r\n                          </tr>\r\n                          <tr>\r\n                            <td class=\"col-md-4\">EndAt</td>\r\n                            <td class=\"col-md-4\">{{game.EndAt}}</td>\r\n                          </tr>\r\n                          <tr>\r\n                            <td class=\"col-md-4\">TotalPositions</td>\r\n                            <td class=\"col-md-4\">{{game.TotalPositions}}</td>\r\n                          </tr>\r\n                        </tbody>\r\n                    </table>\r\n                    <ul *ngIf=\"_Globals.getAppGameByGameId(game._id,true)!=undefined\" >\r\n                      <li *ngFor=\"let position of _Globals.getAppGameByGameId(game._id,true).Positions\" (click)=\"_Globals.betOnGamePosition(true,game._id,position._id)\">{{position.Title}}</li>\r\n                    </ul>\r\n                    <circle-progress\r\n                      [percent]=\"getTime(game.StartOn,game.EndAt)\"\r\n                      [radius]= \"60\"\r\n                      [space]= \"-10\"\r\n                      [outerStrokeWidth]= \"10\"\r\n                      [outerStrokeColor]= \"'#4882c2'\"\r\n                      [outerStrokeLinecap]= \"butt\"\r\n                      [innerStrokeColor]= \"'#e7e8ea'\"\r\n                      [innerStrokeWidth]= \"10\"\r\n                      [title]= \"UI\"\r\n                      [subtitle]= \"UI\"\r\n                      [animateTitle]= \"false\"\r\n                      [animationDuration]= \"0\"\r\n                      [showUnits]= \"false\"\r\n                      [showBackground]= \"false\"\r\n                      [clockwise]= \"false\"\r\n                    ></circle-progress>\r\n                  </div>\r\n                  <div class=\"col-md-4 col-lg-4 col-sm-6 col-xs-12\" style=\"background-color: #f4f4f4;\" >\r\n                    <div style=\"max-height: 265px;min-height: 265px;overflow: auto;\">\r\n                      <ul class=\"contacts-list\" style=\"background-color:#3c8dbc\" *ngIf=\"game.GameGroup!=undefined;\" >\r\n                        <li   *ngFor=\"let message of game.GameGroup.Messages\">\r\n                            <a>\r\n                                <img alt=\"User Image\" class=\"contacts-list-img\" [src]=\"group\" onError=\"this.src='./Content/Images/profile.png';\" >\r\n                    \r\n                                <div class=\"contacts-list-info\">\r\n                                    <span class=\"contacts-list-name\">\r\n                                        {{message.message}}\r\n                                        <small class=\"contacts-list-date pull-right\">Time</small>\r\n                                    </span>\r\n                                <span class=\"contacts-list-msg\">Text</span>\r\n                                </div>\r\n                                \r\n                            </a>\r\n                        </li>\r\n                      </ul>\r\n                    </div>\r\n                    <div>\r\n                      <form action=\"#\" method=\"post\">\r\n                        <div class=\"input-group\">\r\n                          <input (keyup.enter)='sendMessageToGameGroup(gameMessage.value,game._id,true);gameMessage.value=\"\";' type=\"text\" name=\"message\" placeholder=\"Type Message ...\" class=\"form-control\"  #gameMessage >\r\n                            <span class=\"input-group-btn\">\r\n                            <button  (click)='sendMessageToGameGroup(gameMessage.value,game._id,true);gameMessage.value=\"\";' type=\"button\" class=\"btn btn-info btn-flat\">Send</button>\r\n                            </span>\r\n                        </div>\r\n                      </form>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n\r\n            </div>\r\n\r\n\r\n            <div class=\"col-md-12\">\r\n                <p class=\"text-center\">\r\n                  <strong>My Betted Paid Games</strong>\r\n                </p>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-12 col-lg-12 col-sm-12 col-xs-12\" style=\"background-color: gainsboro;padding:20px;box-sizing: border-box;\" *ngFor=\"let game of getParticipentedGames(false);\">\r\n                      <div  class=\"col-md-8 col-lg-8 col-sm-6 col-xs-12\" style=\"background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;\"  (click)=\"_Globals.getAppGameByGameId(game._id,false)\" >\r\n                      <table class=\"table table-striped\">\r\n                          <tbody>\r\n                            <tr>\r\n                              <td class=\"col-md-4\">RemainPositions</td>\r\n                              <td class=\"col-md-4\">{{game.RemainPositions}}</td>\r\n                            </tr>\r\n                            <tr>\r\n                              <td class=\"col-md-4\">StartOn</td>\r\n                              <td class=\"col-md-4\">{{game.StartOn}}</td>\r\n                            </tr>\r\n                            <tr>\r\n                              <td class=\"col-md-4\">EndAt</td>\r\n                              <td class=\"col-md-4\">{{game.EndAt}}</td>\r\n                            </tr>\r\n                            <tr>\r\n                              <td class=\"col-md-4\">TotalPositions</td>\r\n                              <td class=\"col-md-4\">{{game.TotalPositions}}</td>\r\n                            </tr>\r\n                          </tbody>\r\n                      </table>\r\n\r\n                      <ul *ngIf=\"_Globals.getAppGameByGameId(game._id,false)!=undefined\" >\r\n                        <li *ngFor=\"let position of _Globals.getAppGameByGameId(game._id,false).Positions\"  (click)=\"_Globals.betOnGamePosition(false,game._id,position._id)\">{{position.Title}}</li>\r\n                      </ul>\r\n                    </div>\r\n                    \r\n                  <div class=\"col-md-4 col-lg-4 col-sm-6 col-xs-12\" style=\"background-color: #f4f4f4;\" >\r\n                    <div style=\"max-height: 265px;min-height: 265px;overflow: auto;\">\r\n                      <ul class=\"contacts-list\" style=\"background-color:#3c8dbc\" *ngIf=\"game.GameGroup!=undefined;\" >\r\n                        <li   *ngFor=\"let message of game.GameGroup.Messages\">\r\n                            <a>\r\n                                <img alt=\"User Image\" class=\"contacts-list-img\" [src]=\"group\" onError=\"this.src='./Content/Images/profile.png';\" >\r\n                    \r\n                                <div class=\"contacts-list-info\">\r\n                                    <span class=\"contacts-list-name\">\r\n                                        {{message.message}}\r\n                                        <small class=\"contacts-list-date pull-right\">Time</small>\r\n                                    </span>\r\n                                <span class=\"contacts-list-msg\">Text</span>\r\n                                </div>\r\n                                \r\n                            </a>\r\n                        </li>\r\n                      </ul>\r\n                    </div>\r\n                    <div>\r\n                      <form action=\"#\" method=\"post\">\r\n                        <div class=\"input-group\">\r\n                          <input (keyup.enter)='sendMessageToGameGroup(gameMessage.value,game._id,false);gameMessage.value=\"\";' type=\"text\" name=\"message\" placeholder=\"Type Message ...\" class=\"form-control\"  #gameMessage >\r\n                            <span class=\"input-group-btn\">\r\n                            <button  (click)='sendMessageToGameGroup(gameMessage.value,game._id,false);gameMessage.value=\"\";' type=\"button\" class=\"btn btn-info btn-flat\">Send</button>\r\n                            </span>\r\n                        </div>\r\n                      </form>\r\n                    </div>\r\n                  </div>\r\n                  </div>\r\n                </div>\r\n\r\n              </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"footer\">\r\n      </div>\r\n    </app-Box>\r\n    <!-- /.box -->\r\n  </div>\r\n  <!-- /.col -->\r\n</div>\r\n\r\n<!-- /.row -->\r\n\r\n\r\n<!-- /.row -->\r\n\r\n<div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n      <app-Box  [boxControls]='boxControls'>\r\n\r\n        <div class=\"body\"><div class=\"row\">\r\n            \r\n            <div class=\"col-md-12\">\r\n                <p class=\"text-center\">\r\n                  <strong>Free Games</strong>\r\n                </p>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-6 col-lg-6 col-sm-12 col-xs-12\" style=\"background-color: gainsboro;padding:20px;box-sizing: border-box;\" *ngFor=\"let game of getNonParticipentGames(true);\">\r\n                      <div style=\"background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;\"  >\r\n                      <table class=\"table table-striped\" (click)=\"betOnGame(true,game._id)\">\r\n                          <tbody>\r\n                            <tr>\r\n                              <td class=\"col-md-4\">RemainPositions</td>\r\n                              <td class=\"col-md-4\">{{game.RemainPositions}}</td>\r\n                            </tr>\r\n                            <tr>\r\n                              <td class=\"col-md-4\">StartOn</td>\r\n                              <td class=\"col-md-4\">{{game.StartOn}}</td>\r\n                            </tr>\r\n                            <tr>\r\n                              <td class=\"col-md-4\">EndAt</td>\r\n                              <td class=\"col-md-4\">{{game.EndAt}}</td>\r\n                            </tr>\r\n                            <tr>\r\n                              <td class=\"col-md-4\">TotalPositions</td>\r\n                              <td class=\"col-md-4\">{{game.TotalPositions}}</td>\r\n                            </tr>\r\n                          </tbody>\r\n                      </table>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n\r\n              </div>\r\n\r\n\r\n              <div class=\"col-md-12\">\r\n                  <p class=\"text-center\">\r\n                    <strong>Paid Games</strong>\r\n                  </p>\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-6 col-lg-6 col-sm-12 col-xs-12\" style=\"background-color: gainsboro;padding:20px;box-sizing: border-box;\" *ngFor=\"let game of getNonParticipentGames(false);\">\r\n                        <div style=\"background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;\"  >\r\n                        <table class=\"table table-striped\" (click)=\"betOnGame(false,game._id)\">\r\n                            <tbody>\r\n                              <tr>\r\n                                <td class=\"col-md-4\">RemainPositions</td>\r\n                                <td class=\"col-md-4\">{{game.RemainPositions}}</td>\r\n                              </tr>\r\n                              <tr>\r\n                                <td class=\"col-md-4\">StartOn</td>\r\n                                <td class=\"col-md-4\">{{game.StartOn}}</td>\r\n                              </tr>\r\n                              <tr>\r\n                                <td class=\"col-md-4\">EndAt</td>\r\n                                <td class=\"col-md-4\">{{game.EndAt}}</td>\r\n                              </tr>\r\n                              <tr>\r\n                                <td class=\"col-md-4\">TotalPositions</td>\r\n                                <td class=\"col-md-4\">{{game.TotalPositions}}</td>\r\n                              </tr>\r\n                            </tbody>\r\n                        </table>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n  \r\n                </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"footer\">\r\n        </div>\r\n      </app-Box>\r\n      <!-- /.box -->\r\n    </div>\r\n    <!-- /.col -->\r\n  </div>\r\n\r\n<!-- /.row -->\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!-- /.row -->\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n      <app-Box  [boxControls]='boxControls'>\r\n\r\n        <div class=\"body\"><div class=\"row\">\r\n            \r\n            <div class=\"col-md-12\">\r\n                <p class=\"text-center\">\r\n                  <strong>Free Board</strong>\r\n                </p>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-12 col-lg-12 col-sm-12 col-xs-12\" style=\"background-color: gainsboro;padding:20px;box-sizing: border-box;\" *ngFor=\"let appGame of getFreeGames();\">\r\n                      <p>{{appGame.Name}}</p>\r\n                      <div class=\"col-md-6 col-lg-6 col-sm-12 col-xs-12\" *ngFor=\"let challange of appGame.FreeGameChallenges;\" (click)=\"createGame(appGame.IsFree,challange._id)\"><div style=\"background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;\"  >\r\n                          <table class=\"table table-striped\">\r\n                              <tbody>\r\n                                <tr>\r\n                                  <td class=\"col-md-4\">Title</td>\r\n                                  <td class=\"col-md-4\">{{challange.Title}}</td>\r\n                                </tr>\r\n                                <tr>\r\n                                  <td class=\"col-md-4\">BettablePositions</td>\r\n                                  <td class=\"col-md-4\">{{challange.BettablePositions}}</td>\r\n                                </tr>\r\n                                <tr>\r\n                                  <td class=\"col-md-4\">ComissionPercent</td>\r\n                                  <td class=\"col-md-4\">{{challange.ComissionPercent}}</td>\r\n                                </tr>\r\n                                <tr>\r\n                                  <td class=\"col-md-4\">GameTime</td>\r\n                                  <td class=\"col-md-4\">{{challange.GameTime}}</td>\r\n                                </tr>\r\n                                <tr>\r\n                                  <td class=\"col-md-4\">BoardPrice</td>\r\n                                  <td class=\"col-md-4\">{{challange.BoardPrice}}</td>\r\n                                </tr>\r\n                                <tr>\r\n                                  <td class=\"col-md-4\">NoOfPositions</td>\r\n                                  <td class=\"col-md-4\">{{challange.NoOfPositions}}</td>\r\n                                </tr>\r\n                                <tr>\r\n                                  <td class=\"col-md-4\">CoinsPerEachPosition</td>\r\n                                  <td class=\"col-md-4\">{{challange.CoinsPerEachPosition}}</td>\r\n                                </tr>\r\n                              </tbody>\r\n                            </table>\r\n                      </div>\r\n                      </div>\r\n                  </div>\r\n                </div>\r\n\r\n              </div>\r\n\r\n\r\n              <div class=\"col-md-12\">\r\n                  <p class=\"text-center\">\r\n                    <strong>Paid Board</strong>\r\n                  </p>\r\n\r\n                  <div class=\"row\">\r\n                      <div class=\"col-md-12 col-lg-12 col-sm-12 col-xs-12\" style=\"background-color: gainsboro;padding:20px;box-sizing: border-box;\" *ngFor=\"let appGame of getPaidGames();\">\r\n                        <p>{{appGame.Name}}</p>\r\n                        <div class=\"col-md-6 col-lg-6 col-sm-12 col-xs-12\" *ngFor=\"let challange of appGame.Challenges;\" (click)=\"createGame(appGame.IsFree,challange._id)\"><div style=\"background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;\"  >\r\n                          <table class=\"table table-striped\">\r\n                              <tbody>\r\n                                  <tr>\r\n                                      <td class=\"col-md-4\">Title</td>\r\n                                      <td class=\"col-md-4\">{{challange.Title}}</td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                      <td class=\"col-md-4\">BettablePositions</td>\r\n                                      <td class=\"col-md-4\">{{challange.BettablePositions}}</td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                      <td class=\"col-md-4\">ComissionPercent</td>\r\n                                      <td class=\"col-md-4\">{{challange.ComissionPercent}}</td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                      <td class=\"col-md-4\">GameTime</td>\r\n                                      <td class=\"col-md-4\">{{challange.GameTime}}</td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                      <td class=\"col-md-4\">BoardPrice</td>\r\n                                      <td class=\"col-md-4\">{{challange.BoardPrice}}</td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                      <td class=\"col-md-4\">NoOfPositions</td>\r\n                                      <td class=\"col-md-4\">{{challange.NoOfPositions}}</td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                      <td class=\"col-md-4\">CoinsPerEachPosition</td>\r\n                                      <td class=\"col-md-4\">{{challange.CoinsPerEachPosition}}</td>\r\n                                    </tr>\r\n                              </tbody>\r\n                            </table>\r\n                        </div>\r\n                        </div>\r\n                      </div>\r\n                    </div>\r\n                  \r\n                </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"footer\">\r\n          \r\n        </div>\r\n      </app-Box>\r\n      <!-- /.box -->\r\n    </div>\r\n    <!-- /.col -->\r\n  </div>\r\n\r\n<!-- /.row -->\r\n\r\n\r\n\r\n"
+module.exports = "\r\n<!-- /.row -->\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-md-12\">\r\n    <app-Box  [boxControls]='boxControls'>\r\n\r\n      <div class=\"body\"><div class=\"row\">\r\n          \r\n          <div class=\"col-md-12\">\r\n              <p class=\"text-center\">\r\n                <strong>My Betted Free Games</strong>\r\n              </p>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-12 col-lg-12 col-sm-12 col-xs-12\" style=\"background-color: gainsboro;padding:20px;box-sizing: border-box;\" *ngFor=\"let game of getParticipentedGames(true);\">\r\n                    <div  class=\"col-md-8 col-lg-8 col-sm-6 col-xs-12\"  style=\"background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;\"  (click)=\"_socketFunctions.getAppGameByGameId(game._id,true)\">\r\n                    <table class=\"table table-striped\">\r\n                        <tbody>\r\n                          <tr>\r\n                            <td class=\"col-md-4\">RemainPositions</td>\r\n                            <td class=\"col-md-4\">{{game.RemainPositions}}</td>\r\n                          </tr>\r\n                          <tr>\r\n                            <td class=\"col-md-4\">StartOn</td>\r\n                            <td class=\"col-md-4\">{{game.StartOn}}</td>\r\n                          </tr>\r\n                          <tr>\r\n                            <td class=\"col-md-4\">EndAt</td>\r\n                            <td class=\"col-md-4\">{{game.EndAt}}</td>\r\n                          </tr>\r\n                          <tr>\r\n                            <td class=\"col-md-4\">TotalPositions</td>\r\n                            <td class=\"col-md-4\">{{game.TotalPositions}}</td>\r\n                          </tr>\r\n                        </tbody>\r\n                    </table>\r\n                    <ul *ngIf=\"_socketFunctions.getAppGameByGameId(game._id,true)!=undefined\" >\r\n                      <li *ngFor=\"let position of _socketFunctions.getAppGameByGameId(game._id,true).Positions\" (click)=\"_socketFunctions.betOnGamePosition(true,game._id,position._id)\">{{position.Title}}</li>\r\n                    </ul>\r\n                    <circle-progress\r\n                      [percent]=\"getTime(game.StartOn,game.EndAt)\"\r\n                      [radius]= \"60\"\r\n                      [space]= \"-10\"\r\n                      [outerStrokeWidth]= \"10\"\r\n                      [outerStrokeColor]= \"'#4882c2'\"\r\n                      [outerStrokeLinecap]= \"butt\"\r\n                      [innerStrokeColor]= \"'#e7e8ea'\"\r\n                      [innerStrokeWidth]= \"10\"\r\n                      [title]= \"UI\"\r\n                      [subtitle]= \"UI\"\r\n                      [animateTitle]= \"false\"\r\n                      [animationDuration]= \"0\"\r\n                      [showUnits]= \"false\"\r\n                      [showBackground]= \"false\"\r\n                      [clockwise]= \"false\"\r\n                    ></circle-progress>\r\n                  </div>\r\n                  <div class=\"col-md-4 col-lg-4 col-sm-6 col-xs-12\" style=\"background-color: #f4f4f4;\" >\r\n                    <div style=\"max-height: 265px;min-height: 265px;overflow: auto;\">\r\n                      <ul class=\"contacts-list\" style=\"background-color:#3c8dbc\" *ngIf=\"game.GameGroup!=undefined;\" >\r\n                        <li   *ngFor=\"let message of game.GameGroup.Messages\">\r\n                            <a>\r\n                                <img alt=\"User Image\" class=\"contacts-list-img\" [src]=\"group\" onError=\"this.src='./Content/Images/profile.png';\" >\r\n                    \r\n                                <div class=\"contacts-list-info\">\r\n                                    <span class=\"contacts-list-name\">\r\n                                        {{message.message}}\r\n                                        <small class=\"contacts-list-date pull-right\">Time</small>\r\n                                    </span>\r\n                                <span class=\"contacts-list-msg\">Text</span>\r\n                                </div>\r\n                                \r\n                            </a>\r\n                        </li>\r\n                      </ul>\r\n                    </div>\r\n                    <div>\r\n                      <form action=\"#\" method=\"post\">\r\n                        <div class=\"input-group\">\r\n                          <input (keyup.enter)='sendMessageToGameGroup(gameMessage.value,game._id,true);gameMessage.value=\"\";' type=\"text\" name=\"message\" placeholder=\"Type Message ...\" class=\"form-control\"  #gameMessage >\r\n                            <span class=\"input-group-btn\">\r\n                            <button  (click)='sendMessageToGameGroup(gameMessage.value,game._id,true);gameMessage.value=\"\";' type=\"button\" class=\"btn btn-info btn-flat\">Send</button>\r\n                            </span>\r\n                        </div>\r\n                      </form>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n\r\n            </div>\r\n\r\n\r\n            <div class=\"col-md-12\">\r\n                <p class=\"text-center\">\r\n                  <strong>My Betted Paid Games</strong>\r\n                </p>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-12 col-lg-12 col-sm-12 col-xs-12\" style=\"background-color: gainsboro;padding:20px;box-sizing: border-box;\" *ngFor=\"let game of getParticipentedGames(false);\">\r\n                      <div  class=\"col-md-8 col-lg-8 col-sm-6 col-xs-12\" style=\"background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;\"  (click)=\"_socketFunctions.getAppGameByGameId(game._id,false)\" >\r\n                      <table class=\"table table-striped\">\r\n                          <tbody>\r\n                            <tr>\r\n                              <td class=\"col-md-4\">RemainPositions</td>\r\n                              <td class=\"col-md-4\">{{game.RemainPositions}}</td>\r\n                            </tr>\r\n                            <tr>\r\n                              <td class=\"col-md-4\">StartOn</td>\r\n                              <td class=\"col-md-4\">{{game.StartOn}}</td>\r\n                            </tr>\r\n                            <tr>\r\n                              <td class=\"col-md-4\">EndAt</td>\r\n                              <td class=\"col-md-4\">{{game.EndAt}}</td>\r\n                            </tr>\r\n                            <tr>\r\n                              <td class=\"col-md-4\">TotalPositions</td>\r\n                              <td class=\"col-md-4\">{{game.TotalPositions}}</td>\r\n                            </tr>\r\n                          </tbody>\r\n                      </table>\r\n\r\n                      <ul *ngIf=\"_socketFunctions.getAppGameByGameId(game._id,false)!=undefined\" >\r\n                        <li *ngFor=\"let position of _socketFunctions.getAppGameByGameId(game._id,false).Positions\"  (click)=\"_socketFunctions.betOnGamePosition(false,game._id,position._id)\">{{position.Title}}</li>\r\n                      </ul>\r\n                    </div>\r\n                    \r\n                  <div class=\"col-md-4 col-lg-4 col-sm-6 col-xs-12\" style=\"background-color: #f4f4f4;\" >\r\n                    <div style=\"max-height: 265px;min-height: 265px;overflow: auto;\">\r\n                      <ul class=\"contacts-list\" style=\"background-color:#3c8dbc\" *ngIf=\"game.GameGroup!=undefined;\" >\r\n                        <li   *ngFor=\"let message of game.GameGroup.Messages\">\r\n                            <a>\r\n                                <img alt=\"User Image\" class=\"contacts-list-img\" [src]=\"group\" onError=\"this.src='./Content/Images/profile.png';\" >\r\n                    \r\n                                <div class=\"contacts-list-info\">\r\n                                    <span class=\"contacts-list-name\">\r\n                                        {{message.message}}\r\n                                        <small class=\"contacts-list-date pull-right\">Time</small>\r\n                                    </span>\r\n                                <span class=\"contacts-list-msg\">Text</span>\r\n                                </div>\r\n                                \r\n                            </a>\r\n                        </li>\r\n                      </ul>\r\n                    </div>\r\n                    <div>\r\n                      <form action=\"#\" method=\"post\">\r\n                        <div class=\"input-group\">\r\n                          <input (keyup.enter)='sendMessageToGameGroup(gameMessage.value,game._id,false);gameMessage.value=\"\";' type=\"text\" name=\"message\" placeholder=\"Type Message ...\" class=\"form-control\"  #gameMessage >\r\n                            <span class=\"input-group-btn\">\r\n                            <button  (click)='sendMessageToGameGroup(gameMessage.value,game._id,false);gameMessage.value=\"\";' type=\"button\" class=\"btn btn-info btn-flat\">Send</button>\r\n                            </span>\r\n                        </div>\r\n                      </form>\r\n                    </div>\r\n                  </div>\r\n                  </div>\r\n                </div>\r\n\r\n              </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"footer\">\r\n      </div>\r\n    </app-Box>\r\n    <!-- /.box -->\r\n  </div>\r\n  <!-- /.col -->\r\n</div>\r\n\r\n<!-- /.row -->\r\n\r\n\r\n<!-- /.row -->\r\n\r\n<div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n      <app-Box  [boxControls]='boxControls'>\r\n\r\n        <div class=\"body\"><div class=\"row\">\r\n            \r\n            <div class=\"col-md-12\">\r\n                <p class=\"text-center\">\r\n                  <strong>Free Games</strong>\r\n                </p>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-6 col-lg-6 col-sm-12 col-xs-12\" style=\"background-color: gainsboro;padding:20px;box-sizing: border-box;\" *ngFor=\"let game of getNonParticipentGames(true);\">\r\n                      <div style=\"background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;\"  >\r\n                      <table class=\"table table-striped\" (click)=\"betOnGame(true,game._id)\">\r\n                          <tbody>\r\n                            <tr>\r\n                              <td class=\"col-md-4\">RemainPositions</td>\r\n                              <td class=\"col-md-4\">{{game.RemainPositions}}</td>\r\n                            </tr>\r\n                            <tr>\r\n                              <td class=\"col-md-4\">StartOn</td>\r\n                              <td class=\"col-md-4\">{{game.StartOn}}</td>\r\n                            </tr>\r\n                            <tr>\r\n                              <td class=\"col-md-4\">EndAt</td>\r\n                              <td class=\"col-md-4\">{{game.EndAt}}</td>\r\n                            </tr>\r\n                            <tr>\r\n                              <td class=\"col-md-4\">TotalPositions</td>\r\n                              <td class=\"col-md-4\">{{game.TotalPositions}}</td>\r\n                            </tr>\r\n                          </tbody>\r\n                      </table>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n\r\n              </div>\r\n\r\n\r\n              <div class=\"col-md-12\">\r\n                  <p class=\"text-center\">\r\n                    <strong>Paid Games</strong>\r\n                  </p>\r\n                  <div class=\"row\">\r\n                    <div class=\"col-md-6 col-lg-6 col-sm-12 col-xs-12\" style=\"background-color: gainsboro;padding:20px;box-sizing: border-box;\" *ngFor=\"let game of getNonParticipentGames(false);\">\r\n                        <div style=\"background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;\"  >\r\n                        <table class=\"table table-striped\" (click)=\"betOnGame(false,game._id)\">\r\n                            <tbody>\r\n                              <tr>\r\n                                <td class=\"col-md-4\">RemainPositions</td>\r\n                                <td class=\"col-md-4\">{{game.RemainPositions}}</td>\r\n                              </tr>\r\n                              <tr>\r\n                                <td class=\"col-md-4\">StartOn</td>\r\n                                <td class=\"col-md-4\">{{game.StartOn}}</td>\r\n                              </tr>\r\n                              <tr>\r\n                                <td class=\"col-md-4\">EndAt</td>\r\n                                <td class=\"col-md-4\">{{game.EndAt}}</td>\r\n                              </tr>\r\n                              <tr>\r\n                                <td class=\"col-md-4\">TotalPositions</td>\r\n                                <td class=\"col-md-4\">{{game.TotalPositions}}</td>\r\n                              </tr>\r\n                            </tbody>\r\n                        </table>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n  \r\n                </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"footer\">\r\n        </div>\r\n      </app-Box>\r\n      <!-- /.box -->\r\n    </div>\r\n    <!-- /.col -->\r\n  </div>\r\n\r\n<!-- /.row -->\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!-- /.row -->\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n      <app-Box  [boxControls]='boxControls'>\r\n\r\n        <div class=\"body\"><div class=\"row\">\r\n            \r\n            <div class=\"col-md-12\">\r\n                <p class=\"text-center\">\r\n                  <strong>Free Board</strong>\r\n                </p>\r\n                <div class=\"row\">\r\n                  <div class=\"col-md-12 col-lg-12 col-sm-12 col-xs-12\" style=\"background-color: gainsboro;padding:20px;box-sizing: border-box;\" *ngFor=\"let appGame of getFreeGames();\">\r\n                      <p>{{appGame.Name}}</p>\r\n                      <div class=\"col-md-6 col-lg-6 col-sm-12 col-xs-12\" *ngFor=\"let challange of appGame.FreeGameChallenges;\" (click)=\"createGame(appGame.IsFree,challange._id)\"><div style=\"background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;\"  >\r\n                          <table class=\"table table-striped\">\r\n                              <tbody>\r\n                                <tr>\r\n                                  <td class=\"col-md-4\">Title</td>\r\n                                  <td class=\"col-md-4\">{{challange.Title}}</td>\r\n                                </tr>\r\n                                <tr>\r\n                                  <td class=\"col-md-4\">BettablePositions</td>\r\n                                  <td class=\"col-md-4\">{{challange.BettablePositions}}</td>\r\n                                </tr>\r\n                                <tr>\r\n                                  <td class=\"col-md-4\">ComissionPercent</td>\r\n                                  <td class=\"col-md-4\">{{challange.ComissionPercent}}</td>\r\n                                </tr>\r\n                                <tr>\r\n                                  <td class=\"col-md-4\">GameTime</td>\r\n                                  <td class=\"col-md-4\">{{challange.GameTime}}</td>\r\n                                </tr>\r\n                                <tr>\r\n                                  <td class=\"col-md-4\">BoardPrice</td>\r\n                                  <td class=\"col-md-4\">{{challange.BoardPrice}}</td>\r\n                                </tr>\r\n                                <tr>\r\n                                  <td class=\"col-md-4\">NoOfPositions</td>\r\n                                  <td class=\"col-md-4\">{{challange.NoOfPositions}}</td>\r\n                                </tr>\r\n                                <tr>\r\n                                  <td class=\"col-md-4\">CoinsPerEachPosition</td>\r\n                                  <td class=\"col-md-4\">{{challange.CoinsPerEachPosition}}</td>\r\n                                </tr>\r\n                              </tbody>\r\n                            </table>\r\n                      </div>\r\n                      </div>\r\n                  </div>\r\n                </div>\r\n\r\n              </div>\r\n\r\n\r\n              <div class=\"col-md-12\">\r\n                  <p class=\"text-center\">\r\n                    <strong>Paid Board</strong>\r\n                  </p>\r\n\r\n                  <div class=\"row\">\r\n                      <div class=\"col-md-12 col-lg-12 col-sm-12 col-xs-12\" style=\"background-color: gainsboro;padding:20px;box-sizing: border-box;\" *ngFor=\"let appGame of getPaidGames();\">\r\n                        <p>{{appGame.Name}}</p>\r\n                        <div class=\"col-md-6 col-lg-6 col-sm-12 col-xs-12\" *ngFor=\"let challange of appGame.Challenges;\" (click)=\"createGame(appGame.IsFree,challange._id)\"><div style=\"background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;\"  >\r\n                          <table class=\"table table-striped\">\r\n                              <tbody>\r\n                                  <tr>\r\n                                      <td class=\"col-md-4\">Title</td>\r\n                                      <td class=\"col-md-4\">{{challange.Title}}</td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                      <td class=\"col-md-4\">BettablePositions</td>\r\n                                      <td class=\"col-md-4\">{{challange.BettablePositions}}</td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                      <td class=\"col-md-4\">ComissionPercent</td>\r\n                                      <td class=\"col-md-4\">{{challange.ComissionPercent}}</td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                      <td class=\"col-md-4\">GameTime</td>\r\n                                      <td class=\"col-md-4\">{{challange.GameTime}}</td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                      <td class=\"col-md-4\">BoardPrice</td>\r\n                                      <td class=\"col-md-4\">{{challange.BoardPrice}}</td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                      <td class=\"col-md-4\">NoOfPositions</td>\r\n                                      <td class=\"col-md-4\">{{challange.NoOfPositions}}</td>\r\n                                    </tr>\r\n                                    <tr>\r\n                                      <td class=\"col-md-4\">CoinsPerEachPosition</td>\r\n                                      <td class=\"col-md-4\">{{challange.CoinsPerEachPosition}}</td>\r\n                                    </tr>\r\n                              </tbody>\r\n                            </table>\r\n                        </div>\r\n                        </div>\r\n                      </div>\r\n                    </div>\r\n                  \r\n                </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"footer\">\r\n          \r\n        </div>\r\n      </app-Box>\r\n      <!-- /.box -->\r\n    </div>\r\n    <!-- /.col -->\r\n  </div>\r\n\r\n<!-- /.row -->\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -3542,6 +3503,167 @@ module.exports = "<!-- Main row -->\r\n      <div class=\"row\">\r\n        <!--
 /***/ (function(module, exports) {
 
 module.exports = "<!-- /.row -->\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-md-12\">\r\n          <app-Box  [boxControls]='boxControls'>\r\n\r\n            <div class=\"body\"><div class=\"row\">\r\n                <div class=\"col-md-8\">\r\n                  <p class=\"text-center\">\r\n                    <strong>Settings</strong>\r\n                  </p>\r\n\r\n                  <div class=\"chart\">\r\n                    \r\n                    <canvas id=\"salesChart\" style=\"height: 180px;\"></canvas>\r\n                  </div>\r\n                  \r\n                </div>\r\n                \r\n                <div class=\"col-md-4\">\r\n                  <p class=\"text-center\">\r\n                    <strong>Goal Completion</strong>\r\n                  </p>\r\n\r\n                  <div class=\"progress-group\">\r\n                    <span class=\"progress-text\">Add Products to Cart</span>\r\n                    <span class=\"progress-number\"><b>160</b>/200</span>\r\n\r\n                    <div class=\"progress sm\">\r\n                      <div class=\"progress-bar progress-bar-aqua\" style=\"width: 80%\"></div>\r\n                    </div>\r\n                  </div>\r\n                  \r\n                  <div class=\"progress-group\">\r\n                    <span class=\"progress-text\">Complete Purchase</span>\r\n                    <span class=\"progress-number\"><b>310</b>/400</span>\r\n\r\n                    <div class=\"progress sm\">\r\n                      <div class=\"progress-bar progress-bar-red\" style=\"width: 80%\"></div>\r\n                    </div>\r\n                  </div>\r\n                  \r\n                  <div class=\"progress-group\">\r\n                    <span class=\"progress-text\">Visit Premium Page</span>\r\n                    <span class=\"progress-number\"><b>480</b>/800</span>\r\n\r\n                    <div class=\"progress sm\">\r\n                      <div class=\"progress-bar progress-bar-green\" style=\"width: 80%\"></div>\r\n                    </div>\r\n                  </div>\r\n                  \r\n                  <div class=\"progress-group\">\r\n                    <span class=\"progress-text\">Send Inquiries</span>\r\n                    <span class=\"progress-number\"><b>250</b>/500</span>\r\n\r\n                    <div class=\"progress sm\">\r\n                      <div class=\"progress-bar progress-bar-yellow\" style=\"width: 80%\"></div>\r\n                    </div>\r\n                  </div>\r\n                  \r\n                </div>\r\n                \r\n              </div>\r\n            </div>\r\n            <div class=\"footer\">\r\n              <div class=\"row\">\r\n                <div class=\"col-sm-3 col-xs-6\">\r\n                  <div class=\"description-block border-right\">\r\n                    <span class=\"description-percentage text-green\"><i class=\"fa fa-caret-up\"></i> 17%</span>\r\n                    <h5 class=\"description-header\">$35,210.43</h5>\r\n                    <span class=\"description-text\">TOTAL REVENUE</span>\r\n                  </div>\r\n                  <!-- /.description-block -->\r\n                </div>\r\n                <!-- /.col -->\r\n                <div class=\"col-sm-3 col-xs-6\">\r\n                  <div class=\"description-block border-right\">\r\n                    <span class=\"description-percentage text-yellow\"><i class=\"fa fa-caret-left\"></i> 0%</span>\r\n                    <h5 class=\"description-header\">$10,390.90</h5>\r\n                    <span class=\"description-text\">TOTAL COST</span>\r\n                  </div>\r\n                  <!-- /.description-block -->\r\n                </div>\r\n                <!-- /.col -->\r\n                <div class=\"col-sm-3 col-xs-6\">\r\n                  <div class=\"description-block border-right\">\r\n                    <span class=\"description-percentage text-green\"><i class=\"fa fa-caret-up\"></i> 20%</span>\r\n                    <h5 class=\"description-header\">$24,813.53</h5>\r\n                    <span class=\"description-text\">TOTAL PROFIT</span>\r\n                  </div>\r\n                  <!-- /.description-block -->\r\n                </div>\r\n                <!-- /.col -->\r\n                <div class=\"col-sm-3 col-xs-6\">\r\n                  <div class=\"description-block\">\r\n                    <span class=\"description-percentage text-red\"><i class=\"fa fa-caret-down\"></i> 18%</span>\r\n                    <h5 class=\"description-header\">1200</h5>\r\n                    <span class=\"description-text\">GOAL COMPLETIONS</span>\r\n                  </div>\r\n                  <!-- /.description-block -->\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </app-Box>\r\n          <!-- /.box -->\r\n        </div>\r\n        <!-- /.col -->\r\n      </div>\r\n      <!-- /.row -->\r\n"
+
+/***/ }),
+
+/***/ 33:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__SocketManager__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AppData__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Profile_service__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Models__ = __webpack_require__(70);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SocketFunctions; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var SocketFunctions = (function () {
+    function SocketFunctions(_appData, _profileService, injector) {
+        var _this = this;
+        this._appData = _appData;
+        this._profileService = _profileService;
+        setTimeout(function () { return _this._SocketService = injector.get(__WEBPACK_IMPORTED_MODULE_1__SocketManager__["a" /* SocketManager */]); });
+    }
+    SocketFunctions.prototype.sendMessage = function (groupMessage) {
+        this._SocketService.Send({ controller: 'UserGroup', method: 'SendGroupMessages', data: groupMessage });
+    };
+    SocketFunctions.prototype.sendGameMessage = function (gameGroupMessage) {
+        this._SocketService.Send({ controller: 'AppGame', method: 'SendGameGroupMessages', data: gameGroupMessage });
+    };
+    SocketFunctions.prototype.getGroupMessages = function (groupId, previousMessageId) {
+        this._SocketService.Send({ controller: 'UserGroup', method: 'GetGroupMessages', data: { GroupId: groupId, PreviousMessageId: previousMessageId } });
+    };
+    SocketFunctions.prototype.getAppGames = function () {
+        this._SocketService.Send({ controller: 'AppGame', method: 'GetAppGames', data: {} });
+    };
+    SocketFunctions.prototype.getAccount = function () {
+        this._SocketService.Send({ controller: 'Profile', method: 'GetAccount', data: {} });
+    };
+    SocketFunctions.prototype.getFreeRunningGames = function () {
+        this._SocketService.Send({ controller: 'AppGame', method: 'GetFreeGames', data: {} });
+    };
+    SocketFunctions.prototype.getPaidRunningGames = function () {
+        this._SocketService.Send({ controller: 'AppGame', method: 'GetPaidGames', data: {} });
+    };
+    SocketFunctions.prototype.createGame = function (data) {
+        console.log(data);
+        this._SocketService.Send({ controller: 'AppGame', method: 'CreateGame', data: data });
+    };
+    SocketFunctions.prototype.betOnGame = function (data) {
+        this._SocketService.Send({ controller: 'AppGame', method: 'BetOnGame', data: data });
+    };
+    SocketFunctions.prototype.getMyJoinedGames = function () {
+        this._SocketService.Send({ controller: 'AppGame', method: 'GetMyJoinedGames', data: {} });
+    };
+    SocketFunctions.prototype.betOnGamePosition = function (IsFree, gameId, Position) {
+        this._SocketService.Send({ controller: 'AppGame', method: 'BetOnGamePosition', data: { IsFree: IsFree, GameId: gameId, Position: Position } });
+    };
+    SocketFunctions.prototype.getGameGroupDetails = function (IsFree) {
+        var _this = this;
+        if (!IsFree)
+            this._appData.Profile.PaidGames.forEach(function (element) {
+                _this._SocketService.Send({ controller: 'AppGame', method: 'GetGameGroupDetails', data: { IsFree: IsFree, GameId: element._id } });
+            });
+        else
+            this._appData.Profile.FreeGames.forEach(function (element) {
+                _this._SocketService.Send({ controller: 'AppGame', method: 'GetGameGroupDetails', data: { IsFree: IsFree, GameId: element._id } });
+            });
+    };
+    //Filters
+    SocketFunctions.prototype.getAppGameByChallengeId = function (challengeId, IsFree) {
+        if (challengeId == undefined)
+            return undefined;
+        if (IsFree) {
+            return this._appData.Profile.AppGames.find(function (_a) {
+                var FreeGameChallenges = _a.FreeGameChallenges;
+                if (FreeGameChallenges.length > 0)
+                    return FreeGameChallenges.find(function (_a) {
+                        var _id = _a._id;
+                        return _id == challengeId;
+                    })._id == challengeId;
+                else
+                    return undefined;
+            });
+        }
+        else {
+            return this._appData.Profile.AppGames.find(function (_a) {
+                var Challenges = _a.Challenges;
+                if (Challenges.length > 0)
+                    return Challenges.find(function (_a) {
+                        var _id = _a._id;
+                        return _id == challengeId;
+                    })._id == challengeId;
+                else
+                    return undefined;
+            });
+        }
+    };
+    SocketFunctions.prototype.getChallengeIdByGameId = function (gameId, IsFree) {
+        if (IsFree) {
+            var fetchedChallenges = this._appData.Profile.FreeGames.filter(function (_a) {
+                var _id = _a._id;
+                return [gameId].includes(_id);
+            });
+            if (fetchedChallenges.length > 0)
+                return fetchedChallenges[0].ChallengeId;
+            else
+                return undefined;
+        }
+        else {
+            var fetchedChallenges = this._appData.Profile.PaidGames.filter(function (_a) {
+                var _id = _a._id;
+                return [gameId].includes(_id);
+            });
+            if (fetchedChallenges.length > 0)
+                return fetchedChallenges[0].ChallengeId;
+            else
+                return undefined;
+        }
+    };
+    SocketFunctions.prototype.getAppGameByGameId = function (gameId, IsFree) {
+        if (IsFree) {
+            return this.getAppGameByChallengeId(this.getChallengeIdByGameId(gameId, IsFree), IsFree);
+        }
+        else {
+            return this.getAppGameByChallengeId(this.getChallengeIdByGameId(gameId, IsFree), IsFree);
+        }
+    };
+    SocketFunctions.prototype.initializeData = function () {
+        var _this = this;
+        console.log('Coming');
+        //Observable.interval(1000).map(tick => (new Date().getTime()) + ((new Date().getTimezoneOffset()) * 60000)).share().subscribe(time => {this.currentTime = time;});
+        this._appData.Profile = new __WEBPACK_IMPORTED_MODULE_4__Models__["a" /* IProfile */]();
+        this._profileService.getProfile().subscribe(function (profile) {
+            _this._appData.Profile = new __WEBPACK_IMPORTED_MODULE_4__Models__["a" /* IProfile */](profile.data._id, profile.data.Email, profile.data.ProfileName, profile.data.FirstName, profile.data.LastName, profile.data.ProfilePic, profile.data.Location, profile.data.Live, profile.data.IsActive, profile.data.Status, profile.data.User, profile.data.Account);
+            _this._SocketService.Send({ controller: 'UserGroup', method: 'getUserGroup', data: {} });
+            _this.getAppGames();
+            _this.getPaidRunningGames();
+            _this.getFreeRunningGames();
+            _this.getMyJoinedGames();
+        });
+    };
+    return SocketFunctions;
+}());
+SocketFunctions = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__AppData__["a" /* AppData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__AppData__["a" /* AppData */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__Profile_service__["a" /* ProfileService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__Profile_service__["a" /* ProfileService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injector"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injector"]) === "function" && _c || Object])
+], SocketFunctions);
+
+var _a, _b, _c;
+//# sourceMappingURL=SocketFunctions.js.map
 
 /***/ }),
 
@@ -3703,166 +3825,6 @@ module.exports = "\n<div class=\"login-box\">\n  <div class=\"login-logo\">\n   
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"register-box\">\n  <div class=\"register-logo\">\n    <a [routerLink]=\"['/login']\" ><b>Admin</b>LTE</a>\n  </div>\n\n  <div class=\"register-box-body\">\n    <p class=\"login-box-msg\">Register a new membership</p>\n\n    <form action=\"../../index.html\" method=\"post\">\n      <div class=\"form-group has-feedback\">\n        <input type=\"text\" class=\"form-control\" placeholder=\"Full name\" [(ngModel)]='profile.ProfileName' [ngModelOptions]=\"{standalone: true}\">\n        <span class=\"glyphicon glyphicon-user form-control-feedback\"></span>\n      </div>\n      <div class=\"form-group has-feedback\">\n        <input type=\"email\" class=\"form-control\" placeholder=\"Email\" [(ngModel)]='profile.User.Email' [ngModelOptions]=\"{standalone: true}\">\n        <span class=\"glyphicon glyphicon-envelope form-control-feedback\"></span>\n      </div>\n      <div class=\"form-group has-feedback\">\n        <input type=\"password\" class=\"form-control\" placeholder=\"Password\"  [(ngModel)]='profile.User.Password' [ngModelOptions]=\"{standalone: true}\">\n        <span class=\"glyphicon glyphicon-lock form-control-feedback\"></span>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-xs-8\">\n          <div class=\"checkbox icheck\">\n            <label>\n              <input type=\"checkbox\"> I agree to the <a href=\"#\">terms</a>\n            </label>\n          </div>\n        </div>\n        <!-- /.col -->\n        <div class=\"col-xs-4\">\n          <button type=\"submit\" class=\"btn btn-primary btn-block btn-flat\" (click)='regiserUser($event)'>Register</button>\n        </div>\n        <!-- /.col -->\n      </div>\n    </form>\n\n    <div class=\"social-auth-links text-center\">\n      <p>- OR -</p>\n      <a href=\"/auth/facebook\" class=\"btn btn-block btn-social btn-facebook btn-flat\"><i class=\"fa fa-facebook\"></i> Sign up using\n        Facebook</a>\n      <a href=\"/auth/google\" class=\"btn btn-block btn-social btn-google btn-flat\"><i class=\"fa fa-google-plus\"></i> Sign up using\n        Google+</a>\n    </div>\n\n    <a [routerLink]=\"['/login']\"  class=\"text-center\">I already have a membership</a>\n  </div>\n  <!-- /.form-box -->\n</div>\n<!-- /.register-box -->"
-
-/***/ }),
-
-/***/ 38:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__SocketManager__ = __webpack_require__(113);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AppData__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Profile_service__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Models__ = __webpack_require__(70);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SocketFunctions; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var SocketFunctions = (function () {
-    function SocketFunctions(_appData, _SocketService, _profileService) {
-        this._appData = _appData;
-        this._SocketService = _SocketService;
-        this._profileService = _profileService;
-    }
-    SocketFunctions.prototype.sendMessage = function (groupMessage) {
-        this._SocketService.Send({ controller: 'UserGroup', method: 'SendGroupMessages', data: groupMessage });
-    };
-    SocketFunctions.prototype.sendGameMessage = function (gameGroupMessage) {
-        this._SocketService.Send({ controller: 'AppGame', method: 'SendGameGroupMessages', data: gameGroupMessage });
-    };
-    SocketFunctions.prototype.getGroupMessages = function (groupId, previousMessageId) {
-        this._SocketService.Send({ controller: 'UserGroup', method: 'GetGroupMessages', data: { GroupId: groupId, PreviousMessageId: previousMessageId } });
-    };
-    SocketFunctions.prototype.getAppGames = function () {
-        this._SocketService.Send({ controller: 'AppGame', method: 'GetAppGames', data: {} });
-    };
-    SocketFunctions.prototype.getAccount = function () {
-        this._SocketService.Send({ controller: 'Profile', method: 'GetAccount', data: {} });
-    };
-    SocketFunctions.prototype.getFreeRunningGames = function () {
-        this._SocketService.Send({ controller: 'AppGame', method: 'GetFreeGames', data: {} });
-    };
-    SocketFunctions.prototype.getPaidRunningGames = function () {
-        this._SocketService.Send({ controller: 'AppGame', method: 'GetPaidGames', data: {} });
-    };
-    SocketFunctions.prototype.createGame = function (data) {
-        console.log(data);
-        this._SocketService.Send({ controller: 'AppGame', method: 'CreateGame', data: data });
-    };
-    SocketFunctions.prototype.betOnGame = function (data) {
-        this._SocketService.Send({ controller: 'AppGame', method: 'BetOnGame', data: data });
-    };
-    SocketFunctions.prototype.getMyJoinedGames = function () {
-        this._SocketService.Send({ controller: 'AppGame', method: 'GetMyJoinedGames', data: {} });
-    };
-    SocketFunctions.prototype.betOnGamePosition = function (IsFree, gameId, Position) {
-        this._SocketService.Send({ controller: 'AppGame', method: 'BetOnGamePosition', data: { IsFree: IsFree, GameId: gameId, Position: Position } });
-    };
-    SocketFunctions.prototype.getGameGroupDetails = function (IsFree) {
-        var _this = this;
-        if (!IsFree)
-            this._appData.Profile.PaidGames.forEach(function (element) {
-                _this._SocketService.Send({ controller: 'AppGame', method: 'GetGameGroupDetails', data: { IsFree: IsFree, GameId: element._id } });
-            });
-        else
-            this._appData.Profile.FreeGames.forEach(function (element) {
-                _this._SocketService.Send({ controller: 'AppGame', method: 'GetGameGroupDetails', data: { IsFree: IsFree, GameId: element._id } });
-            });
-    };
-    //Filters
-    SocketFunctions.prototype.getAppGameByChallengeId = function (challengeId, IsFree) {
-        if (challengeId == undefined)
-            return undefined;
-        if (IsFree) {
-            return this._appData.Profile.AppGames.find(function (_a) {
-                var FreeGameChallenges = _a.FreeGameChallenges;
-                if (FreeGameChallenges.length > 0)
-                    return FreeGameChallenges.find(function (_a) {
-                        var _id = _a._id;
-                        return _id == challengeId;
-                    })._id == challengeId;
-                else
-                    return undefined;
-            });
-        }
-        else {
-            return this._appData.Profile.AppGames.find(function (_a) {
-                var Challenges = _a.Challenges;
-                if (Challenges.length > 0)
-                    return Challenges.find(function (_a) {
-                        var _id = _a._id;
-                        return _id == challengeId;
-                    })._id == challengeId;
-                else
-                    return undefined;
-            });
-        }
-    };
-    SocketFunctions.prototype.getChallengeIdByGameId = function (gameId, IsFree) {
-        if (IsFree) {
-            var fetchedChallenges = this._appData.Profile.FreeGames.filter(function (_a) {
-                var _id = _a._id;
-                return [gameId].includes(_id);
-            });
-            if (fetchedChallenges.length > 0)
-                return fetchedChallenges[0].ChallengeId;
-            else
-                return undefined;
-        }
-        else {
-            var fetchedChallenges = this._appData.Profile.PaidGames.filter(function (_a) {
-                var _id = _a._id;
-                return [gameId].includes(_id);
-            });
-            if (fetchedChallenges.length > 0)
-                return fetchedChallenges[0].ChallengeId;
-            else
-                return undefined;
-        }
-    };
-    SocketFunctions.prototype.getAppGameByGameId = function (gameId, IsFree) {
-        if (IsFree) {
-            return this.getAppGameByChallengeId(this.getChallengeIdByGameId(gameId, IsFree), IsFree);
-        }
-        else {
-            return this.getAppGameByChallengeId(this.getChallengeIdByGameId(gameId, IsFree), IsFree);
-        }
-    };
-    SocketFunctions.prototype.initializeData = function () {
-        var _this = this;
-        console.log('Coming');
-        //Observable.interval(1000).map(tick => (new Date().getTime()) + ((new Date().getTimezoneOffset()) * 60000)).share().subscribe(time => {this.currentTime = time;});
-        this._appData.Profile = new __WEBPACK_IMPORTED_MODULE_4__Models__["a" /* IProfile */]();
-        this._profileService.getProfile().subscribe(function (profile) {
-            _this._appData.Profile = new __WEBPACK_IMPORTED_MODULE_4__Models__["a" /* IProfile */](profile.data._id, profile.data.Email, profile.data.ProfileName, profile.data.FirstName, profile.data.LastName, profile.data.ProfilePic, profile.data.Location, profile.data.Live, profile.data.IsActive, profile.data.Status, profile.data.User, profile.data.Account);
-            _this._SocketService.Send({ controller: 'UserGroup', method: 'getUserGroup', data: {} });
-            _this.getAppGames();
-            _this.getPaidRunningGames();
-            _this.getFreeRunningGames();
-            _this.getMyJoinedGames();
-        });
-    };
-    return SocketFunctions;
-}());
-SocketFunctions = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__AppData__["a" /* AppData */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__AppData__["a" /* AppData */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__SocketManager__["a" /* SocketManager */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__SocketManager__["a" /* SocketManager */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__Profile_service__["a" /* ProfileService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__Profile_service__["a" /* ProfileService */]) === "function" && _c || Object])
-], SocketFunctions);
-
-var _a, _b, _c;
-//# sourceMappingURL=SocketFunctions.js.map
 
 /***/ }),
 
