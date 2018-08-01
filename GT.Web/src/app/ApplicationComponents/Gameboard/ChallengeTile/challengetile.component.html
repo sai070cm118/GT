@@ -1,0 +1,24 @@
+
+<div class="row" style="margin-left: 0px;margin-right: 0px;" *ngFor="let appGame of getGames();">
+  <p>{{appGame.Name}}</p>
+  
+<div class="col-md-12 col-lg-6 col-sm-12 col-xs-12" *ngFor="let challange of getGameChallenges(appGame);" (click)="createGame(challange._id)">
+   
+    <div class="info-box bg-aqua">
+        <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Bookmarks</span>
+          <span class="info-box-number">41,410</span>
+
+          <div class="progress">
+            <div class="progress-bar" style="width: 70%"></div>
+          </div>
+              <span class="progress-description">
+                70% Increase in 30 Days
+              </span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+  </div>
+</div>

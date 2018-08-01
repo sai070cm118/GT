@@ -13,6 +13,9 @@ export class TreeComponent {
     isActiveTree=-1;
     isSubActiveTree=-1;
 
+    currentMainIndex=0;
+    currentSubIndex=0;
+
     expandTree($index:any){
         if(this.isActiveTree==$index)
             this.isActiveTree=-1;
@@ -21,13 +24,15 @@ export class TreeComponent {
 
         this.isSubActiveTree=0;
         
-        console.log($index);
-        this.updaateContent.emit($index);
+        this.currentMainIndex=$index;
+        this.currentSubIndex=0;
+        this.updaateContent.emit({mainIndex:this.currentMainIndex,subIndex:this.currentSubIndex});
     }
 
     selectTree($index:any){
-        console.log($index);
+        this.currentSubIndex=$index;
         this.isSubActiveTree=$index;
+        this.updaateContent.emit({mainIndex:this.currentMainIndex,subIndex:this.currentSubIndex});
     }
 
     

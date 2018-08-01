@@ -1,0 +1,89 @@
+
+
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-md-12">
+    <app-Box  [boxControls]='boxControls'>
+
+      <div class="body"><div class="row">
+          
+          <div class="col-md-12">
+              <p class="text-center">
+                <strong>Free Games</strong>
+              </p>
+              <div class="row">
+                <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12" style="background-color: gainsboro;padding:20px;box-sizing: border-box;" *ngFor="let game of getNonParticipentGames(true);">
+                    <div style="background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;"  >
+                    <table class="table table-striped" (click)="betOnGame(true,game._id)">
+                        <tbody>
+                          <tr>
+                            <td class="col-md-4">RemainPositions</td>
+                            <td class="col-md-4">{{game.RemainPositions}}</td>
+                          </tr>
+                          <tr>
+                            <td class="col-md-4">StartOn</td>
+                            <td class="col-md-4">{{game.StartOn}}</td>
+                          </tr>
+                          <tr>
+                            <td class="col-md-4">EndAt</td>
+                            <td class="col-md-4">{{game.EndAt}}</td>
+                          </tr>
+                          <tr>
+                            <td class="col-md-4">TotalPositions</td>
+                            <td class="col-md-4">{{game.TotalPositions}}</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="col-md-12">
+                <p class="text-center">
+                  <strong>Paid Games</strong>
+                </p>
+                <div class="row">
+                  <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12" style="background-color: gainsboro;padding:20px;box-sizing: border-box;" *ngFor="let game of getNonParticipentGames(false);">
+                      <div style="background-color:white;box-shadow: 7px 7px 5px -5px grey;padding:10px;margin-bottom:10px;"  >
+                      <table class="table table-striped" (click)="betOnGame(false,game._id)">
+                          <tbody>
+                            <tr>
+                              <td class="col-md-4">RemainPositions</td>
+                              <td class="col-md-4">{{game.RemainPositions}}</td>
+                            </tr>
+                            <tr>
+                              <td class="col-md-4">StartOn</td>
+                              <td class="col-md-4">{{game.StartOn}}</td>
+                            </tr>
+                            <tr>
+                              <td class="col-md-4">EndAt</td>
+                              <td class="col-md-4">{{game.EndAt}}</td>
+                            </tr>
+                            <tr>
+                              <td class="col-md-4">TotalPositions</td>
+                              <td class="col-md-4">{{game.TotalPositions}}</td>
+                            </tr>
+                          </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+        </div>
+      </div>
+      <div class="footer">
+      </div>
+    </app-Box>
+    <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+
+<!-- /.row -->
+
+

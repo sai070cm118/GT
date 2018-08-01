@@ -1,4 +1,4 @@
-﻿import { NgModule }      from '@angular/core';
+﻿import { NgModule, ApplicationModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -46,7 +46,11 @@ import {DashboardComponent} from './ApplicationComponents/Dashboard/index';
 import {GameboardComponent} from './ApplicationComponents/Gameboard/index';
 import {ProfileComponent} from './ApplicationComponents/Profile/index';
 import {SettingsComponent} from './ApplicationComponents/Settings/index';
-
+import { ChallengesComponent } from './ApplicationComponents/Gameboard/Challenges/index'
+import { MyBettedGamesComponent } from './ApplicationComponents/Gameboard/my-betted-games/index'
+import { MyGamesComponent } from './ApplicationComponents/Gameboard/my-games/index'
+import { RunningGamesComponent } from './ApplicationComponents/Gameboard/running-games/index'
+import { ChallengeTile } from './ApplicationComponents/Gameboard/ChallengeTile/index'
 
 import { SocketFunctions } from './Services/WebSocket/SocketFunctions/SocketFunctions';
 import { SocketIoModule } from 'ng-socket-io';
@@ -121,7 +125,13 @@ import {
         DashboardComponent,
         GameboardComponent,
         ProfileComponent,
-        SettingsComponent
+        SettingsComponent,
+
+        ChallengesComponent,
+        MyBettedGamesComponent,
+        MyGamesComponent,
+        RunningGamesComponent,
+        ChallengeTile
     ],
     providers: [
         AuthGuard,

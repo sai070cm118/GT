@@ -1,0 +1,1 @@
+export * from './my-betted-games.component';

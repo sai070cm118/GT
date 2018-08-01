@@ -22,6 +22,30 @@ export class MenuService{
                 rightContent:[
                 ],
                 subMenu:[
+                    {
+                        subMenuItem:"My Games",
+                        icon:"fa fa-gamepad",
+                        rightContent:[
+                        ]
+                    },
+                    {
+                        subMenuItem:"My Betted Games",
+                        icon:"fa fa-gamepad",
+                        rightContent:[
+                        ]
+                    },
+                    {
+                        subMenuItem:"Running Games",
+                        icon:"fa fa-gamepad",
+                        rightContent:[
+                        ]
+                    },
+                    {
+                        subMenuItem:"Challenges",
+                        icon:"fa fa-gamepad",
+                        rightContent:[
+                        ]
+                    }
                 ]
             },
             {

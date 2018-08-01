@@ -37,4 +37,8 @@ export class AppData {
     ngOnInit() {
 
     }
+
+    //App Settings
+
+    public appSettings:any={};
 }

@@ -38,26 +38,6 @@ export class LayoutComponent {
     currentView:number=1;
 
     
-    viewProfiles($index:any){
-        this.currentView=$index;
-    }
-
-    updaateContents($index:any){
-        console.log($index);
-        this.currentView=$index;
-    }
-
-
-    configuarion={
-        chatBoxControls:{},
-        treeItems:[],
-        popOver:[]
-    };
-
-    private connection:any;
-    isMenuExpanded = false;
-    contentOpacity = 1;
-
     constructor(
         private _SocketService:SocketManager,
         private _ProfileService:ProfileService,
@@ -77,6 +57,31 @@ export class LayoutComponent {
         this.configuarion.chatBoxControls=this._ChatBoxService.getChatBox();
     }
    
+
+
+    viewProfiles($index:any){
+        this.currentView=$index;
+    }
+
+    updaateContents($event:any){
+
+        this._Globals.appSettings.mainViewIndex=$event.mainIndex;
+        this._Globals.appSettings.subViewIndex=$event.subIndex;
+
+        console.log(this._Globals.appSettings);
+    }
+
+
+    configuarion={
+        chatBoxControls:{},
+        treeItems:[],
+        popOver:[]
+    };
+
+    private connection:any;
+    isMenuExpanded = false;
+    contentOpacity = 1;
+
 
     //To change the opacity while chat window active.
     changeContentOpacity($event:any){

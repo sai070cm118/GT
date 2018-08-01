@@ -26,8 +26,7 @@ export class LeftMenuComponent {
         this._Globals.Profile.Live=this._ProfileService.updateLiveStatus(this._Globals.Profile.Live);
     }
 
-    updaateContents($index:any){
-        console.log($index);
-        this.updaateContent.emit($index);
+    updaateContents($event:any){
+        this.updaateContent.emit($event);
     }
 }
